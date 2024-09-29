@@ -3,8 +3,8 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Hank Chen`,
-    siteUrl: `https://www.yourdomain.tld`
+    title: 'Hank Chen',
+    siteUrl: 'https://www.yourdomain.tld',
   },
-  plugins: ["gatsby-plugin-styled-components"]
+  plugins: ['gatsby-plugin-styled-components'],
 };
