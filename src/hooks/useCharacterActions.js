@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import useStore, { useElevatorStore } from '../Store';
+import useStore from '../Store';
 
 const checkCollision = (obj1Ref, obj2Ref) => {
   const rect1 = obj1Ref?.current?.getBoundingClientRect();
@@ -26,14 +26,14 @@ const keyToDirectionMap = {
   37: 'left',
 };
 
-export default function useCharacterActions(speed = 5) {
+export default function useCharacterActions({ characterRef, speed = 5 }) {
   const {
-    menuSelection, showTooltip, setMenuSelection, setShowTooltip, floorList,
-  } = useElevatorStore();
-  const {
-    interactablesRef: { elevatorRef, characterRef, containerRef },
-    sceneSettings: { cinematicBottom, coverHeight },
+    interactableRefs: { character, ...restInteractableRefs },
+    dispatchInteractableRefs,
+    sceneRefs: { containerRef },
+    sceneSettings: { cinematicBottom },
   } = useStore();
+
   const [direction, setDirection] = React.useState(null);
   const [x, setX] = React.useState((window.outerWidth + 50) / 2);
   // const [y, setY] = React.useState((window.outerHeight + 50) / 2);
@@ -56,28 +56,19 @@ export default function useCharacterActions(speed = 5) {
 
   useEffect(() => {
     const clydeNavigation = setInterval(() => {
-      if (checkCollision(characterRef, elevatorRef)) {
-        setShowTooltip(true);
-      } else {
-        setShowTooltip(false);
-        setMenuSelection(null);
-      }
+      Object.values(restInteractableRefs).forEach(({ ref, setState, state }) => {
+        if (!state && checkCollision(characterRef, ref)) {
+          setState('TOOLTIP');
+        } else if (state && checkCollision(characterRef, ref)) {
+          // do nothing
+        } else {
+          setState(null);
+        }
+      });
 
       switch (direction) {
-        // case 'up':
-        //   setY((prev) => {
-        //     containerRef.current.scrollBy(0, 0);
-        //     return prev - speed;
-        //   });
-        //   break;
         case 'right':
           setX((prev) => prev + speed);
-          break;
-        case 'down':
-          // setY((prev) => {
-          //   containerRef.current.scrollBy(0, 0);
-          //   return prev + speed;
-          // });
           break;
         case 'left':
           setX((prev) => prev - speed);
@@ -87,7 +78,15 @@ export default function useCharacterActions(speed = 5) {
     }, 10);
 
     return () => clearInterval(clydeNavigation);
-  }, [direction, containerRef, speed]);
+  }, [direction, containerRef, speed, characterRef, restInteractableRefs]);
+
+  useEffect(() => {
+    if (characterRef) {
+      dispatchInteractableRefs({
+        character: { ref: characterRef, setY, setX },
+      });
+    }
+  }, [setX, setY, characterRef, dispatchInteractableRefs]);
 
   return {
     x, y, setDirection,

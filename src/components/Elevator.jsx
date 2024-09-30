@@ -1,7 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import styled from 'styled-components';
+import { number } from 'prop-types';
 import { FloatingButton, ParallaxLayer } from '../styledComponents';
 import useStore, { useElevatorStore } from '../Store';
+import { getElevationBounds } from '../hooks/utils';
 
 export const ElevatorNode = styled(ParallaxLayer)`
   height: 200px;
@@ -17,43 +21,20 @@ const keyToAction = {
   70: 'f',
 };
 
-const floorLevel = {
-  1: 6,
-  4: 3,
-  7: 0,
-};
-
-const floorList = [
-  {
-    floor: 7,
-    title: 'Intro',
-    subtitle: 'Roof Top',
-  },
-  {
-    floor: 4,
-    title: 'About Me',
-    subtitle: 'Apartment',
-  },
-  {
-    floor: 1,
-    title: 'Experience',
-    subtitle: 'Reception',
-  },
-];
-
 export default function Elevator({ level }) {
+  const ref = useRef();
   const {
-    interactablesRef: { elevatorRef, containerRef },
+    interactableRefs: { character },
+    sceneRefs: { containerRef },
     sceneSettings: { coverHeight },
+    dispatchInteractableRefs,
   } = useStore();
   const {
-    showTooltip,
-    menuSelection,
-    setMenuSelection,
-    setShowTooltip,
+    floorList,
   } = useElevatorStore();
 
-  const elevation = level * window.innerHeight;
+  const [menuSelection, setMenuSelection] = useState(null);
+  const { elevationBottom } = getElevationBounds(level);
 
   const onKeyDown = useCallback(({ keyCode }) => {
     const selectionIndex = floorList.indexOf(menuSelection);
@@ -67,52 +48,54 @@ export default function Elevator({ level }) {
         }
         break;
       case 'f':
-        if (showTooltip) {
-          if (menuSelection) {
-            console.log(menuSelection.floor);
-            containerRef.current.scrollTo(
-              0,
-              window.innerHeight * floorLevel[menuSelection.floor]
-            );
-            setMenuSelection(null);
-          } else {
-            setMenuSelection(floorList[0]);
-          }
+        if (floorList.includes(menuSelection)) {
+          const {
+            elevationTop: destinationTop,
+            elevationBottom: destinationBottom,
+          } = getElevationBounds(selectionIndex);
+          containerRef.current.scrollTo(0, destinationTop);
+          character.setY(destinationBottom - coverHeight - 150 - 100);
+          setMenuSelection(null);
+        } else {
+          setMenuSelection(floorList[0]);
         }
         break;
       default:
     }
   }, [
-    showTooltip,
+    character,
+    coverHeight,
     setMenuSelection,
     menuSelection,
+    containerRef,
+    floorList,
   ]);
-
-  const onKeyUp = useCallback(({ keyCode }) => {
-  }, []);
 
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('keyup', onKeyUp);
+    return () => { document.removeEventListener('keydown', onKeyDown); };
+  }, [onKeyDown]);
 
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.removeEventListener('keyup', onKeyUp);
-    };
-  }, [onKeyDown, onKeyUp]);
+  useEffect(() => {
+    if (ref) {
+      dispatchInteractableRefs({
+        [floorList[level].refKey]: { ref, state: menuSelection, setState: setMenuSelection },
+      });
+    }
+  }, [menuSelection, ref, floorList, dispatchInteractableRefs, level]);
 
   return (
     <ElevatorNode
-      ref={elevatorRef}
-      style={{ left: 100, top: elevation - ((coverHeight + 300)) }}
+      ref={ref}
+      style={{ left: 100, top: elevationBottom - coverHeight - 300 }}
     >
-      {showTooltip && !menuSelection
+      {menuSelection === 'TOOLTIP'
         && (
         <FloatingButton style={{ top: 100 }}>
           Take Elevator
         </FloatingButton>
         )}
-      {menuSelection && floorList.map(({ title, subtitle, level }) => (
+      {floorList.includes(menuSelection) && floorList.map(({ title, subtitle }) => (
         <div key={title + subtitle}>
           <button
             type="button"
@@ -128,3 +111,7 @@ export default function Elevator({ level }) {
     </ElevatorNode>
   );
 }
+
+Elevator.propTypes = {
+  level: number.isRequired,
+};

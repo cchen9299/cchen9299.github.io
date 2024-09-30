@@ -1,5 +1,9 @@
 import React, {
-  createContext, useMemo, useContext, useState,
+  createContext,
+  useMemo,
+  useContext,
+  useState,
+  useReducer,
 } from 'react';
 import { node } from 'prop-types';
 
@@ -7,18 +11,25 @@ const StoreContext = createContext('store');
 const ElevatorContext = createContext('elevator');
 
 export function Store({ children }) {
-  const characterRef = React.useRef();
   const containerRef = React.useRef();
-  const elevatorRef = React.useRef();
   const blockerRef = React.useRef();
+
+  const [interactableRefs, dispatchInteractableRefs] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {}
+  );
+  const [interactingRef, setInteractingRef] = useState(null);
 
   const coverHeight = (window.innerHeight / 2.39) * 0.5;
   const cinematicBottom = window.innerHeight - coverHeight;
 
   const initialState = useMemo(() => ({
-    interactablesRef: {
-      elevatorRef,
-      characterRef,
+    interactableRefs,
+    dispatchInteractableRefs,
+    interactingRef,
+    setInteractingRef,
+
+    sceneRefs: {
       containerRef,
       blockerRef,
     },
@@ -28,8 +39,9 @@ export function Store({ children }) {
     },
   }),
   [
-    elevatorRef,
-    characterRef,
+    interactableRefs,
+    dispatchInteractableRefs,
+    interactingRef,
     containerRef,
     cinematicBottom,
     coverHeight,
@@ -44,27 +56,27 @@ export function Store({ children }) {
     menuSelection,
     setMenuSelection,
 
-    floorLevel: {
-      1: 7,
-      2: 4,
-      3: 1,
-    },
-
     floorList: [
       {
-        floor: 7,
+        levelFromRoof: 0,
+        floor: 3,
         title: 'Intro',
         subtitle: 'Roof Top',
+        refKey: 'roofElevatorRef',
       },
       {
-        floor: 4,
+        levelFromRoof: 1,
+        floor: 2,
         title: 'About Me',
-        subtitle: 'Apartment',
+        subtitle: 'Office',
+        refKey: 'officeElevatorRef',
       },
       {
+        levelFromRoof: 2,
         floor: 1,
         title: 'Experience',
         subtitle: 'Reception',
+        refKey: 'groundElevatorRef',
       },
     ],
 

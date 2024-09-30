@@ -4,19 +4,18 @@ import Character from './Character';
 import {
   ParallaxLayer, FarBox, MidBox,
 } from '../styledComponents';
-import useStore from '../Store';
+import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
 
 const hundred = new Array(100);
 const ten = new Array(10);
 const midLayerBoxes = [...hundred.keys()];
 const farLayerBoxes = [...ten.keys()];
-const closeLayerBoxes = [...ten.keys()];
+// const closeLayerBoxes = [...ten.keys()];
 
 export default function Container() {
-  const {
-    interactablesRef: { containerRef },
-  } = useStore();
+  const { sceneRefs: { containerRef } } = useStore();
+  const { floorList } = useElevatorStore(1);
 
   return (
     <ContainerNode ref={containerRef}>
@@ -27,9 +26,12 @@ export default function Container() {
         {midLayerBoxes.map((_) => <MidBox key={_} />)}
       </ParallaxLayer>
       <Character />
-      <Elevator level={1} />
-      {/* <Elevator level={4} />
-      <Elevator level={7} /> */}
+      {floorList.map(({ title, subtitle, levelFromRoof }) => (
+        <Elevator
+          key={title + subtitle}
+          level={levelFromRoof}
+        />
+      ))}
       <ParallaxLayer />
       {/* <ParallaxLayer>
     {closeLayerBoxes.map((_) => <CloseBox key={_} />)}

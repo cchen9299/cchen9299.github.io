@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { ParallaxLayer } from '../styledComponents';
 import { useCharacterActions } from '../hooks';
-import useStore from '../Store';
 
 const CharacterNode = styled(ParallaxLayer)`
   height: 150px;
@@ -12,14 +11,12 @@ const CharacterNode = styled(ParallaxLayer)`
 `;
 
 export default function Character() {
-  const {
-    interactablesRef: { characterRef },
-  } = useStore();
-  const { x, y, setDirection } = useCharacterActions();
+  const ref = useRef();
+  const { x, y } = useCharacterActions({ characterRef: ref });
 
   return (
     <CharacterNode
-      ref={characterRef}
+      ref={ref}
       id="ghost"
       style={{
         left: x,
