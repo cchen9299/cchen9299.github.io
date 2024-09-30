@@ -20,6 +20,7 @@
     "test:unit": "echo No Tests Yet"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.24.7",
     "babel-plugin-styled-components": "^2.1.4",
     "gatsby": "^5.13.7",
     "gatsby-plugin-styled-components": "^6.13.1",
@@ -32,6 +33,7 @@
     "eslint": "^8.57.1",
     "eslint-config-amex": "^16.1.0",
     "gh-pages": "^6.1.1",
-    "husky": "^9.1.6"
+    "husky": "^9.1.6",
+    "prop-types": "^15.8.1"
   }
 }
