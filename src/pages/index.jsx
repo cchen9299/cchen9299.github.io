@@ -8,7 +8,7 @@ import { CINEMATIC_BOTTOM, CINEMATIC_COVERAGE_HEIGHT } from '../hooks/constants'
 const IndexPage = () => (
   <Store>
     <main>
-      <Blocker />
+      {/* <Blocker /> */}
       <Cover style={{ height: CINEMATIC_COVERAGE_HEIGHT, opacity: 0.5 }} />
       <Container />
       <Cover style={{ height: CINEMATIC_COVERAGE_HEIGHT, top: CINEMATIC_BOTTOM, opacity: 0.5 }} />

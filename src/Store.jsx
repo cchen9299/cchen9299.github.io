@@ -55,24 +55,31 @@ export function Store({ children }) {
     floorList: [
       {
         levelFromRoof: 0,
-        floor: 3,
+        floor: 4,
         title: 'Intro',
         subtitle: 'Roof Top',
         refKey: 'roofElevatorRef',
       },
       {
         levelFromRoof: 1,
-        floor: 2,
+        floor: 3,
         title: 'About Me',
         subtitle: 'Bedroom',
         refKey: 'bedroomElevatorRef',
       },
       {
         levelFromRoof: 2,
-        floor: 1,
+        floor: 2,
         title: 'Experience',
         subtitle: 'Office',
         refKey: 'officeElevatorRef',
+      },
+      {
+        levelFromRoof: 3,
+        floor: 1,
+        title: 'Some Other Stuff',
+        subtitle: 'Ground',
+        refKey: 'groundElevatorRef',
       },
     ],
 

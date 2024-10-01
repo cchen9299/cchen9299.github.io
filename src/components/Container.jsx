@@ -6,6 +6,8 @@ import {
 } from '../styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
+import ForthLayer from './ForthLayer';
+import ThirdLayer from './ThirdLayer';
 
 const hundred = new Array(100);
 const ten = new Array(10);
@@ -13,17 +15,26 @@ const midLayerBoxes = [...hundred.keys()];
 const farLayerBoxes = [...ten.keys()];
 // const closeLayerBoxes = [...ten.keys()];
 
+const TowerA = styled.div`
+    height: 400vh;
+    width: 200px;
+    background-color: #555;
+    position: absolute;
+    right: 0;
+    top:0;
+`;
+
 export default function Container() {
   const { sceneRefs: { containerRef } } = useStore();
   const { floorList } = useElevatorStore(1);
 
   return (
     <ContainerNode ref={containerRef}>
+      <ForthLayer />
+      <ThirdLayer />
       <ParallaxLayer>
-        {farLayerBoxes.map((_) => <FarBox key={_} />)}
-      </ParallaxLayer>
-      <ParallaxLayer>
-        {midLayerBoxes.map((_) => <MidBox key={_} />)}
+        {/* {midLayerBoxes.map((_) => <MidBox key={_} />)} */}
+        <TowerA />
       </ParallaxLayer>
       <Character />
       {floorList.map(({ title, subtitle, levelFromRoof }) => (
@@ -32,10 +43,6 @@ export default function Container() {
           level={levelFromRoof}
         />
       ))}
-      <ParallaxLayer />
-      {/* <ParallaxLayer>
-    {closeLayerBoxes.map((_) => <CloseBox key={_} />)}
-  </ParallaxLayer> */}
     </ContainerNode>
   );
 }
@@ -43,6 +50,7 @@ export default function Container() {
 export const ContainerNode = styled.div`
   height: 100vh;
   perspective: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   scroll-behavior: smooth
 `;
