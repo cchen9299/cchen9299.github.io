@@ -6,6 +6,7 @@ import React, {
   useReducer,
 } from 'react';
 import { node } from 'prop-types';
+import { CINEMATIC_BOTTOM, CINEMATIC_COVERAGE_HEIGHT } from './hooks/constants';
 
 const StoreContext = createContext('store');
 const ElevatorContext = createContext('elevator');
@@ -20,9 +21,6 @@ export function Store({ children }) {
   );
   const [interactingRef, setInteractingRef] = useState(null);
 
-  const coverHeight = (window.innerHeight / 2.39) * 0.5;
-  const cinematicBottom = window.innerHeight - coverHeight;
-
   const initialState = useMemo(() => ({
     interactableRefs,
     dispatchInteractableRefs,
@@ -34,8 +32,8 @@ export function Store({ children }) {
       blockerRef,
     },
     sceneSettings: {
-      cinematicBottom,
-      coverHeight,
+      cinematicBottom: CINEMATIC_BOTTOM,
+      coverHeight: CINEMATIC_COVERAGE_HEIGHT,
     },
   }),
   [
@@ -43,8 +41,6 @@ export function Store({ children }) {
     dispatchInteractableRefs,
     interactingRef,
     containerRef,
-    cinematicBottom,
-    coverHeight,
   ]);
 
   const [showTooltip, setShowTooltip] = useState(false);
@@ -68,15 +64,15 @@ export function Store({ children }) {
         levelFromRoof: 1,
         floor: 2,
         title: 'About Me',
-        subtitle: 'Office',
-        refKey: 'officeElevatorRef',
+        subtitle: 'Bedroom',
+        refKey: 'bedroomElevatorRef',
       },
       {
         levelFromRoof: 2,
         floor: 1,
         title: 'Experience',
-        subtitle: 'Reception',
-        refKey: 'groundElevatorRef',
+        subtitle: 'Office',
+        refKey: 'officeElevatorRef',
       },
     ],
 

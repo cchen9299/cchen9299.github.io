@@ -3,22 +3,18 @@ import styled from 'styled-components';
 import '../styles.css';
 import { Store } from '../Store';
 import Container from '../components/Container';
+import { CINEMATIC_BOTTOM, CINEMATIC_COVERAGE_HEIGHT } from '../hooks/constants';
 
-const IndexPage = () => {
-  const coverHeight = (window.innerHeight / 2.39) * 0.5;
-  const cinematicBottom = window.innerHeight - coverHeight;
-
-  return (
-    <Store>
-      <main>
-        <Blocker />
-        <Cover style={{ height: coverHeight, opacity: 0.5 }} />
-        <Container />
-        <Cover style={{ height: coverHeight, top: cinematicBottom, opacity: 0.5 }} />
-      </main>
-    </Store>
-  );
-};
+const IndexPage = () => (
+  <Store>
+    <main>
+      <Blocker />
+      <Cover style={{ height: CINEMATIC_COVERAGE_HEIGHT, opacity: 0.5 }} />
+      <Container />
+      <Cover style={{ height: CINEMATIC_COVERAGE_HEIGHT, top: CINEMATIC_BOTTOM, opacity: 0.5 }} />
+    </main>
+  </Store>
+);
 
 export default IndexPage;
 
