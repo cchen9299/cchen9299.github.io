@@ -5,3 +5,5 @@ export const CINEMATIC_COVERAGE_HEIGHT = (
 ) * 0.5;
 
 export const CINEMATIC_BOTTOM = window.innerHeight - CINEMATIC_COVERAGE_HEIGHT;
+
+export const FLOOR_HEIGHT = 30;

@@ -6,6 +6,7 @@ import { number } from 'prop-types';
 import { FloatingButton, ParallaxLayer } from '../styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import { getElevationBounds } from '../hooks/utils';
+import { FLOOR_HEIGHT } from '../hooks/constants';
 
 export const ElevatorNode = styled(ParallaxLayer)`
   height: 200px;
@@ -54,7 +55,7 @@ export default function Elevator({ level }) {
             elevationBottom: destinationBottom,
           } = getElevationBounds(selectionIndex);
           containerRef.current.scrollTo(0, destinationTop);
-          character.setY(destinationBottom - coverHeight - 150 - 100);
+          character.setY(destinationBottom - coverHeight - 150 - FLOOR_HEIGHT);
           setMenuSelection(null);
         } else {
           setMenuSelection(floorList[0]);
@@ -87,7 +88,7 @@ export default function Elevator({ level }) {
   return (
     <ElevatorNode
       ref={ref}
-      style={{ left: 100, top: elevationBottom - coverHeight - 300 }}
+      style={{ left: 100, top: elevationBottom - coverHeight - 200 - FLOOR_HEIGHT }}
     >
       {menuSelection === 'TOOLTIP'
         && (
