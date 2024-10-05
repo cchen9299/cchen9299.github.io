@@ -7,7 +7,8 @@ const CharacterNode = styled(ParallaxLayer)`
   height: 150px;
   width: 70px;
   background-color: black;
-  position: relative;
+  position: absolute;
+  z-index:2000;
 `;
 
 export default function Character() {

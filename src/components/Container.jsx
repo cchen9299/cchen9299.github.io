@@ -1,19 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Character from './Character';
-import {
-  ParallaxLayer, FarBox, MidBox,
-} from '../styledComponents';
+import { ParallaxLayer } from '../styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
 import ForthLayer from './ForthLayer';
 import ThirdLayer from './ThirdLayer';
-
-const hundred = new Array(100);
-const ten = new Array(10);
-const midLayerBoxes = [...hundred.keys()];
-const farLayerBoxes = [...ten.keys()];
-// const closeLayerBoxes = [...ten.keys()];
+import { CINEMATIC_COVERAGE_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
 
 const TowerA = styled.div`
     height: 400vh;
@@ -22,6 +15,16 @@ const TowerA = styled.div`
     position: absolute;
     right: 0;
     top:0;
+`;
+
+const Floor = styled.div`
+    height: 100vh;
+    width: 60vw;
+    border-bottom: ${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid grey;
+    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid grey`)};
+    position: relative;
+    box-sizing: border-box;
+    background-color: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : 'pink')};
 `;
 
 export default function Container() {
@@ -33,15 +36,15 @@ export default function Container() {
       <ForthLayer />
       <ThirdLayer />
       <ParallaxLayer>
-        {/* {midLayerBoxes.map((_) => <MidBox key={_} />)} */}
         <TowerA />
       </ParallaxLayer>
       <Character />
       {floorList.map(({ title, subtitle, levelFromRoof }) => (
-        <Elevator
-          key={title + subtitle}
-          level={levelFromRoof}
-        />
+        <Floor key={title + subtitle} levelFromRoof={levelFromRoof}>
+          <Elevator
+            level={levelFromRoof}
+          />
+        </Floor>
       ))}
     </ContainerNode>
   );

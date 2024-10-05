@@ -35,16 +35,17 @@ export default function Elevator({ level }) {
   } = useElevatorStore();
 
   const [menuSelection, setMenuSelection] = useState(null);
-  const { elevationBottom } = getElevationBounds(level);
 
   const onKeyDown = useCallback(({ keyCode }) => {
     const selectionIndex = floorList.indexOf(menuSelection);
     switch (keyToAction[keyCode]) {
       case 'up':
-        if (menuSelection && selectionIndex > 0) setMenuSelection(floorList[selectionIndex - 1]);
+        if (floorList.includes(menuSelection) && selectionIndex > 0) {
+          setMenuSelection(floorList[selectionIndex - 1]);
+        }
         break;
       case 'down':
-        if (menuSelection && selectionIndex < floorList.length - 1) {
+        if (floorList.includes(menuSelection) && selectionIndex < floorList.length - 1) {
           setMenuSelection(floorList[selectionIndex + 1]);
         }
         break;
@@ -58,12 +59,13 @@ export default function Elevator({ level }) {
           character.setY(destinationBottom - coverHeight - 150 - FLOOR_HEIGHT);
           setMenuSelection(null);
         } else {
-          setMenuSelection(floorList[0]);
+          setMenuSelection(floorList[level]);
         }
         break;
       default:
     }
   }, [
+    level,
     character,
     coverHeight,
     setMenuSelection,
@@ -88,7 +90,7 @@ export default function Elevator({ level }) {
   return (
     <ElevatorNode
       ref={ref}
-      style={{ left: 100, top: elevationBottom - coverHeight - 200 - FLOOR_HEIGHT }}
+      style={{ left: 100, bottom: 0 }}
     >
       {menuSelection === 'TOOLTIP'
         && (

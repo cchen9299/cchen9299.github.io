@@ -70,6 +70,8 @@ const CelestialBody = styled.div`
     top: 17%;
 `;
 
+const arr = new Array
+
 export default function ForthLayer() {
   return (
     <ParallaxLayer>

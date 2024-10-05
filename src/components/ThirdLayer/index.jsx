@@ -5,7 +5,7 @@ import { ParallaxLayer } from '../../styledComponents';
 
 export const FarBox = styled.div`
   background-color: rgba(0,0,200,0.5);
-  height: 290vh;
+  height: 300vh;
   width: 100vw;
   position: absolute;
 
@@ -18,6 +18,7 @@ export const CloseBox = styled.div`
   height: 300vh;
   width: 100vw;
   position: absolute;
+  overflow: hidden;
 
   -webkit-transform: translateZ(-150px) scale(1.5);
   transform: translateZ(-150px) scale(1.5);
@@ -42,21 +43,21 @@ const TowerB = styled.div`
 `;
 
 const TowerC = styled.div`
-    height: 190vh;
+    height: 290vh;
     width: 600px;
     background-color: #555;
     position: absolute;
     right: 30%;
-    bottom: 0;
+    bottom: -100vh;
 `;
 
 const TowerD = styled.div`
-    height: 185vh;
+    height: 285vh;
     width: 600px;
     background-color: #555;
     position: absolute;
     right: 65%;
-    bottom: 0;
+    bottom: -100vh;
 `;
 
 export default function ThirdLayer() {
