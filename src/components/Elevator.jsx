@@ -6,12 +6,35 @@ import { number } from 'prop-types';
 import { FloatingButton, ParallaxLayer } from '../styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import { getElevationBounds } from '../hooks/utils';
-import { FLOOR_HEIGHT } from '../hooks/constants';
+import { getMoveFloorCalc } from '../hooks/constants';
 
 export const ElevatorNode = styled(ParallaxLayer)`
-  height: 200px;
+  height: 235px;
   width: 150px;
-  background-color: purple;
+  background-color: #26345C;
+  left: 0;
+  bottom: 0;
+`;
+
+const ElevatorText = styled.div`
+  padding: 10px;
+  border: 2px solid;
+  border-radius: 5px;
+  border-color: #FFD3FF;
+  background-color: rgba(0,102,255,0.5);
+  box-shadow:
+    inset 0 0 20px 5px #F0F,
+    0 0 5px 2px #FFF,
+    0 0 5px 2px #F0F,
+    0 0 50px 5px #F0F;
+
+  font-size: 1.25rem;
+  font-family: "Orbitron", sans-serif;
+  color: #FFD3FF;
+  text-shadow: 
+    0 0 10px #FFF,
+    0 0 10px #F0F,
+    0 0 50px #F0F;
 `;
 
 const keyToAction = {
@@ -21,6 +44,18 @@ const keyToAction = {
   40: 'down',
   70: 'f',
 };
+
+const Door = styled.div`
+  background-color: #33426E;
+  width: 70px;
+  height: 200px;
+`;
+
+const DoorRight = styled(Door)`
+  border-left: 5px solid #101D43;
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+`;
 
 export default function Elevator({ level }) {
   const ref = useRef();
@@ -56,7 +91,9 @@ export default function Elevator({ level }) {
             elevationBottom: destinationBottom,
           } = getElevationBounds(selectionIndex);
           containerRef.current.scrollTo(0, destinationTop);
-          character.setY(destinationBottom - coverHeight - 150 - FLOOR_HEIGHT);
+          console.log(destinationBottom);
+          console.log(coverHeight);
+          character.setY(getMoveFloorCalc(destinationBottom));
           setMenuSelection(null);
         } else {
           setMenuSelection(floorList[level]);
@@ -88,10 +125,17 @@ export default function Elevator({ level }) {
   }, [menuSelection, ref, floorList, dispatchInteractableRefs, level]);
 
   return (
-    <ElevatorNode
-      ref={ref}
-      style={{ left: 0, bottom: 0 }}
-    >
+    <ElevatorNode ref={ref}>
+      <div style={{
+        display: 'flex', position: 'absolute', bottom: 0, zIndex: -1, left: -10,
+      }}
+      >
+        <Door style={{ marginRight: 2 }} />
+        <DoorRight style={{}} />
+      </div>
+      <div style={{ top: -30, position: 'relative' }}>
+        <ElevatorText>Elevator</ElevatorText>
+      </div>
       {menuSelection === 'TOOLTIP'
         && (
         <FloatingButton style={{ top: 100 }}>

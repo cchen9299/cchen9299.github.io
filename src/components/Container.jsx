@@ -1,18 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import Character from './Character';
-import { ParallaxLayer } from '../styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
 import ForthLayer from './ForthLayer';
 import ThirdLayer from './ThirdLayer';
-import { CINEMATIC_COVERAGE_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
+import { CINEMATIC_COVERAGE_WITH_FLOOR } from '../hooks/constants';
 
 const Floor = styled.div`
     height: 100vh;
     width: 60vw;
-    border-bottom: ${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid;
-    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid`)};
+    border-bottom: ${CINEMATIC_COVERAGE_WITH_FLOOR} solid;
+    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `${CINEMATIC_COVERAGE_WITH_FLOOR} solid`)};
     border-color: #101D43;
     position: relative;
     box-sizing: border-box;

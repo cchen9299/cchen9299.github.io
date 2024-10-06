@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import useStore from '../Store';
-import { FLOOR_HEIGHT } from './constants';
 
 const checkCollision = (obj1Ref, obj2Ref) => {
   const rect1 = obj1Ref?.current?.getBoundingClientRect();
@@ -27,7 +26,7 @@ const keyToDirectionMap = {
   37: 'left',
 };
 
-export default function useCharacterActions({ characterRef, speed = 5 }) {
+export default function useCharacterActions({ characterRef, speed = 0.5 }) {
   const {
     interactableRefs: { character, ...restInteractableRefs },
     dispatchInteractableRefs,
@@ -36,9 +35,8 @@ export default function useCharacterActions({ characterRef, speed = 5 }) {
   } = useStore();
 
   const [direction, setDirection] = React.useState(null);
-  const [x, setX] = React.useState((window.outerWidth + 50) / 2);
-  // const [y, setY] = React.useState((window.outerHeight + 50) / 2);
-  const [y, setY] = React.useState(cinematicBottom - 150 - FLOOR_HEIGHT);
+  const [x, setX] = React.useState(50);
+  const [y, setY] = React.useState(cinematicBottom);
 
   const onKeyDown = useCallback(({ keyCode }) => {
     setDirection(keyToDirectionMap[keyCode]);

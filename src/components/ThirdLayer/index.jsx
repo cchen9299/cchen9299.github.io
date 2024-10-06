@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import {
   ParallaxLayer,
   Screen,
-  Antenna,
-  Fog,
 } from '../../styledComponents';
 import Tower from '../common/Tower';
 

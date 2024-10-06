@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ParallaxLayer } from '../styledComponents';
 import { useCharacterActions } from '../hooks';
@@ -9,6 +9,10 @@ const CharacterNode = styled(ParallaxLayer)`
   background-color: black;
   position: absolute;
   z-index:2000;
+
+  left: ${({ x }) => x}vw;
+  top: ${({ y }) => y};
+  transition: all 0.1s linear;
 `;
 
 export default function Character() {
@@ -19,11 +23,8 @@ export default function Character() {
     <CharacterNode
       ref={ref}
       id="ghost"
-      style={{
-        left: x,
-        top: y,
-        transition: 'all 0.1s linear',
-      }}
+      x={x}
+      y={y}
     />
   );
 }
