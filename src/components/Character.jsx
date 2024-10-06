@@ -11,7 +11,7 @@ const CharacterNode = styled(ParallaxLayer)`
   z-index:2000;
 
   left: ${({ x }) => x}vw;
-  top: ${({ y }) => y};
+  top: ${({ y }) => `calc(${y})`};
   transition: all 0.1s linear;
 `;
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import '../styles.css';
 import { Store } from '../Store';
 import Container from '../components/Container';
-import { CINEMATIC_COVERAGE_HEIGHT } from '../hooks/constants';
+import { CINEMATIC_COVER_HEIGHT } from '../hooks/constants';
 
 const IndexPage = () => (
   <Store>
@@ -20,7 +20,7 @@ export default IndexPage;
 
 const Cover = styled.div`
   width: 100vw;
-  height: ${CINEMATIC_COVERAGE_HEIGHT};
+  height: calc(${CINEMATIC_COVER_HEIGHT});
   background-color: black;
   position: absolute;
   z-index: 1001

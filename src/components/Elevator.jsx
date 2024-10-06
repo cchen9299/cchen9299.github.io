@@ -62,7 +62,6 @@ export default function Elevator({ level }) {
   const {
     interactableRefs: { character },
     sceneRefs: { containerRef },
-    sceneSettings: { coverHeight },
     dispatchInteractableRefs,
   } = useStore();
   const {
@@ -88,12 +87,9 @@ export default function Elevator({ level }) {
         if (floorList.includes(menuSelection)) {
           const {
             elevationTop: destinationTop,
-            elevationBottom: destinationBottom,
           } = getElevationBounds(selectionIndex);
           containerRef.current.scrollTo(0, destinationTop);
-          console.log(destinationBottom);
-          console.log(coverHeight);
-          character.setY(getMoveFloorCalc(destinationBottom));
+          character.setY(getMoveFloorCalc(selectionIndex));
           setMenuSelection(null);
         } else {
           setMenuSelection(floorList[level]);
@@ -104,7 +100,6 @@ export default function Elevator({ level }) {
   }, [
     level,
     character,
-    coverHeight,
     setMenuSelection,
     menuSelection,
     containerRef,

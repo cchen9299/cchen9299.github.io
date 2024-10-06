@@ -6,7 +6,7 @@ import React, {
   useReducer,
 } from 'react';
 import { node } from 'prop-types';
-import { CINEMATIC_BOTTOM, CINEMATIC_COVERAGE_HEIGHT } from './hooks/constants';
+import { CINEMATIC_BOTTOM, CINEMATIC_COVER_HEIGHT } from './hooks/constants';
 
 const StoreContext = createContext('store');
 const ElevatorContext = createContext('elevator');
@@ -33,7 +33,7 @@ export function Store({ children }) {
     },
     sceneSettings: {
       cinematicBottom: CINEMATIC_BOTTOM,
-      coverHeight: CINEMATIC_COVERAGE_HEIGHT,
+      coverHeight: CINEMATIC_COVER_HEIGHT,
     },
   }),
   [

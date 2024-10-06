@@ -5,13 +5,13 @@ import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
 import ForthLayer from './ForthLayer';
 import ThirdLayer from './ThirdLayer';
-import { CINEMATIC_COVERAGE_WITH_FLOOR } from '../hooks/constants';
+import { CINEMATIC_COVER_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
 
 const Floor = styled.div`
     height: 100vh;
     width: 60vw;
-    border-bottom: ${CINEMATIC_COVERAGE_WITH_FLOOR} solid;
-    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `${CINEMATIC_COVERAGE_WITH_FLOOR} solid`)};
+    border-bottom: calc(${CINEMATIC_COVER_HEIGHT} + ${FLOOR_HEIGHT}) solid;
+    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `calc(${CINEMATIC_COVER_HEIGHT} + ${FLOOR_HEIGHT}) solid`)};
     border-color: #101D43;
     position: relative;
     box-sizing: border-box;

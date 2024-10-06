@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import useStore from '../Store';
+import { FLOOR_HEIGHT } from './constants';
 
 const checkCollision = (obj1Ref, obj2Ref) => {
   const rect1 = obj1Ref?.current?.getBoundingClientRect();
@@ -36,7 +37,7 @@ export default function useCharacterActions({ characterRef, speed = 0.5 }) {
 
   const [direction, setDirection] = React.useState(null);
   const [x, setX] = React.useState(50);
-  const [y, setY] = React.useState(cinematicBottom);
+  const [y, setY] = React.useState(`${cinematicBottom} - ${FLOOR_HEIGHT}`);
 
   const onKeyDown = useCallback(({ keyCode }) => {
     setDirection(keyToDirectionMap[keyCode]);
@@ -74,7 +75,7 @@ export default function useCharacterActions({ characterRef, speed = 0.5 }) {
           break;
         default:
       }
-    }, 10);
+    }, 20);
 
     return () => clearInterval(clydeNavigation);
   }, [direction, containerRef, speed, characterRef, restInteractableRefs]);
