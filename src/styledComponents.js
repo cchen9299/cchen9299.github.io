@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useFloorRandom } from './hooks';
 
 export const ParallaxLayer = styled.div`
   display: flex;
@@ -52,4 +53,74 @@ export const FloatingButton = styled.button`
   z-index: 1000;
   position: absolute;
   border: none
+`;
+
+export const Screen = styled.div`
+    width: 100%;
+    height: 4%;
+    background-color: ${({ baseColor }) => baseColor};
+    box-shadow:
+        0 0 40px 0px ${({ baseColor, shadowColor }) => shadowColor || baseColor},
+        0 0 150px 0px ${({ baseColor, shadowColor }) => shadowColor || baseColor};
+`;
+
+export const TowerNode = styled.div`
+    height: ${({ height }) => height}vh;
+    width: ${({ width }) => width}vh;
+    right: ${({ right }) => right}%;
+    background: linear-gradient(180deg, #0C1E37 20%, #386099 100%);
+    border-right: 5px solid #426B9F;
+    
+    position: absolute;
+    bottom: 0%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+`;
+
+export const LightsShortNode = styled.div`
+    height: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 200)}px`};
+    width: 5px;
+    background-color: ${() => 'rgba(214,209,232,1)'};
+    margin-top: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 200)}%`};
+    margin-left: ${() => `${useFloorRandom(10) + 5}`}%;
+    margin-right: ${() => `${useFloorRandom(10) + 5}`}%;
+
+    box-shadow:
+      0 0 15px 1px #56DDED,
+      0 0 300px 0px #56DDED;
+`;
+
+export const LightsNode = styled.div`
+    height: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 400)}px`};
+    width: 5px;
+    background-color: ${() => 'rgba(214,209,232,1)'};
+    margin-top: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 400)}%`};
+    margin-left: ${() => `${useFloorRandom(10) + 5}`}%;
+    margin-right: ${() => `${useFloorRandom(10) + 5}`}%;
+
+    box-shadow:
+      0 0 15px 1px #56DDED,
+      0 0 300px 0px #56DDED;
+`;
+
+export const Antenna = styled.div`
+    width: ${({ width = 3 }) => width}px;
+    top: ${({ height }) => -height}px;
+    left: ${({ left }) => left}%;
+    height: ${({ height }) => height}px;
+    position: absolute;
+    
+    box-shadow:
+        0 0 15px 1px ${({ color = '#56DDED' }) => color};
+    background-color: #D6D1E8;
+`;
+
+export const Fog = styled.div`
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+
+    background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(255,255,255,0.3) 100%);
 `;

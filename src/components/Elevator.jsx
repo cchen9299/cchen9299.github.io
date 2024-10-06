@@ -90,7 +90,7 @@ export default function Elevator({ level }) {
   return (
     <ElevatorNode
       ref={ref}
-      style={{ left: 100, bottom: 0 }}
+      style={{ left: 0, bottom: 0 }}
     >
       {menuSelection === 'TOOLTIP'
         && (

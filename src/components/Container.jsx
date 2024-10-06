@@ -8,23 +8,15 @@ import ForthLayer from './ForthLayer';
 import ThirdLayer from './ThirdLayer';
 import { CINEMATIC_COVERAGE_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
 
-const TowerA = styled.div`
-    height: 400vh;
-    width: 200px;
-    background-color: #555;
-    position: absolute;
-    right: 0;
-    top:0;
-`;
-
 const Floor = styled.div`
     height: 100vh;
     width: 60vw;
-    border-bottom: ${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid grey;
-    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid grey`)};
+    border-bottom: ${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid;
+    border-top: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : `${CINEMATIC_COVERAGE_HEIGHT + FLOOR_HEIGHT}px solid`)};
+    border-color: #101D43;
     position: relative;
     box-sizing: border-box;
-    background-color: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : 'pink')};
+    background-color: ${({ levelFromRoof }) => (levelFromRoof === 0 ? '' : '')};
 `;
 
 export default function Container() {
@@ -35,9 +27,6 @@ export default function Container() {
     <ContainerNode ref={containerRef}>
       <ForthLayer />
       <ThirdLayer />
-      <ParallaxLayer>
-        <TowerA />
-      </ParallaxLayer>
       <Character />
       {floorList.map(({ title, subtitle, levelFromRoof }) => (
         <Floor key={title + subtitle} levelFromRoof={levelFromRoof}>
@@ -52,6 +41,7 @@ export default function Container() {
 
 export const ContainerNode = styled.div`
   height: 100vh;
+  max-height:200vh;
   perspective: 300px;
   overflow-y: scroll;
   overflow-x: hidden;

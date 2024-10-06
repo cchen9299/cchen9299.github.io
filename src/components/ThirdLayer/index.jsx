@@ -1,80 +1,87 @@
 import React from 'react';
-
 import styled from 'styled-components';
-import { ParallaxLayer } from '../../styledComponents';
+import {
+  ParallaxLayer,
+  Screen,
+  Antenna,
+  Fog,
+} from '../../styledComponents';
+import Tower from '../common/Tower';
 
 export const FarBox = styled.div`
-  background-color: rgba(0,0,200,0.5);
-  height: 300vh;
+  height: 215vh;
   width: 100vw;
-  position: absolute;
+  position: relative;
+  bottom:0;
 
-  -webkit-transform: translateZ(-200px) scale(1.75);
-  transform: translateZ(-200px) scale(1.75);
+  -webkit-transform: translateZ(-300px) scale(2.4);
+  transform: translateZ(-300px) scale(2.4);
 `;
 
-export const CloseBox = styled.div`
-  background-color: rgba(0,0,200,0.2);
-  height: 300vh;
-  width: 100vw;
-  position: absolute;
-  overflow: hidden;
-
-  -webkit-transform: translateZ(-150px) scale(1.5);
-  transform: translateZ(-150px) scale(1.5);
-`;
-
-const TowerA = styled.div`
-    height: 185vh;
-    width: 550px;
-    background-color: #555;
-    position: absolute;
-    right: 10%;
-    bottom: 0;
-`;
-
-const TowerB = styled.div`
-    height: 200vh;
-    width: 200px;
-    background-color: #555;
-    position: absolute;
-    right: 60%;
-    bottom: 0;
-`;
-
-const TowerC = styled.div`
-    height: 290vh;
-    width: 600px;
-    background-color: #555;
-    position: absolute;
-    right: 30%;
-    bottom: -100vh;
-`;
-
-const TowerD = styled.div`
-    height: 285vh;
-    width: 600px;
-    background-color: #555;
-    position: absolute;
-    right: 65%;
-    bottom: -100vh;
-`;
-
-export default function ThirdLayer() {
+export default function ForthLayer() {
   return (
     <ParallaxLayer>
       <FarBox>
         <div>
-          <TowerA />
-          <TowerB />
+          <Tower height={110} width={22} right={80}>
+            <Screen
+              baseColor="#F0F"
+              style={{
+                marginTop: '10%', marginLeft: '50%', bottom: '10%', width: '40%', height: '50%', position: 'absolute',
+              }}
+            />
+          </Tower>
+          <Tower height={100} width={10} right={62}>
+            <Screen
+              baseColor="#0FF"
+              style={{
+                marginTop: '10%', marginLeft: '10%', width: '80%', height: '80%', position: 'absolute',
+              }}
+            />
+          </Tower>
+          <Tower height={80} width={10} right={65} />
+          <Tower height={110} width={10} right={52}>
+            <Screen
+              baseColor="#FF0"
+              style={{
+                top: '25%', marginLeft: '10%', width: '80%', height: '70%', position: 'absolute',
+              }}
+            />
+          </Tower>
+          <Tower height={80} width={3} right={49} />
+          <Tower height={80} width={10} right={40}>
+            <Screen
+              baseColor="#FF0"
+              style={{
+                marginTop: '50%', marginLeft: '10%', width: '80%', height: '5%',
+              }}
+            />
+          </Tower>
+          <Tower height={80} width={8} right={32}>
+            <Screen
+              baseColor="#EDFEF7"
+              shadowColor="#56DDED"
+              style={{ height: '2%' }}
+            />
+          </Tower>
+          <Tower height={60} width={10} right={26} short={true}>
+            <Screen
+              baseColor="#F0F"
+              style={{
+                height: '30%', left: '50%', width: '40%', position: 'absolute', bottom: '5%',
+              }}
+            />
+          </Tower>
+          <Tower height={50} width={13} right={9} short={true}>
+            <Screen
+              baseColor="#F0F"
+              style={{ height: '2%' }}
+            />
+          </Tower>
+          <Tower height={30} width={15} right={15} short={true} />
         </div>
+        {/* <Fog /> */}
       </FarBox>
-      <CloseBox>
-        <div>
-          <TowerC />
-          <TowerD />
-        </div>
-      </CloseBox>
     </ParallaxLayer>
   );
 }
