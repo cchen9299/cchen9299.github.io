@@ -9,11 +9,12 @@ import { getElevationBounds } from '../hooks/utils';
 import { getMoveFloorCalc } from '../hooks/constants';
 
 export const ElevatorNode = styled(ParallaxLayer)`
-  height: 235px;
+  min-height: 235px;
+  height: ${({ isTopLevel }) => (isTopLevel ? 'inherit' : 100)}%;
   width: 150px;
-  background-color: #26345C;
-  left: 0;
-  bottom: 0;
+  background-color: #1C344E;
+  z-index: 1000;
+  bottom:0;
 `;
 
 const ElevatorText = styled.div`
@@ -45,13 +46,13 @@ const keyToAction = {
   70: 'f',
 };
 
-const Door = styled.div`
+const DoorLeft = styled.div`
   background-color: #33426E;
   width: 70px;
   height: 200px;
 `;
 
-const DoorRight = styled(Door)`
+const DoorRight = styled(DoorLeft)`
   border-left: 5px solid #101D43;
   -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1);
@@ -120,16 +121,20 @@ export default function Elevator({ level }) {
   }, [menuSelection, ref, floorList, dispatchInteractableRefs, level]);
 
   return (
-    <ElevatorNode ref={ref}>
-      <div style={{
-        display: 'flex', position: 'absolute', bottom: 0, zIndex: -1, left: -10,
-      }}
+    <ElevatorNode ref={ref} isTopLevel={level === 0}>
+      <div
+        style={{
+          display: 'flex',
+          position: 'absolute',
+          bottom: 0,
+          left: -10,
+        }}
       >
-        <Door style={{ marginRight: 2 }} />
-        <DoorRight style={{}} />
+        <DoorLeft style={{ marginRight: 2 }} />
+        <DoorRight />
       </div>
-      <div style={{ top: -30, position: 'relative' }}>
-        <ElevatorText>Elevator</ElevatorText>
+      <div style={{ position: 'absolute', bottom: 235 }}>
+        <ElevatorText>Elevator {level}</ElevatorText>
       </div>
       {menuSelection === 'TOOLTIP'
         && (

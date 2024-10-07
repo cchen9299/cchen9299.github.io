@@ -79,10 +79,10 @@ export const TowerNode = styled.div`
 `;
 
 export const LightsShortNode = styled.div`
-    height: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 200)}px`};
+    height: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 100)}px`};
     width: 5px;
     background-color: ${() => 'rgba(214,209,232,1)'};
-    margin-top: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 200)}%`};
+    margin-top: ${() => `${useFloorRandom(useFloorRandom(4) + 1 * 100)}%`};
     margin-left: ${() => `${useFloorRandom(10) + 5}`}%;
     margin-right: ${() => `${useFloorRandom(10) + 5}`}%;
 

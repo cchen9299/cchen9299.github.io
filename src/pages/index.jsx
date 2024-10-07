@@ -23,7 +23,8 @@ const Cover = styled.div`
   height: calc(${CINEMATIC_COVER_HEIGHT});
   background-color: black;
   position: absolute;
-  z-index: 1001
+  z-index: 1001;
+  opacity: 0.5;
 `;
 
 const Blocker = styled.div`

@@ -5,6 +5,7 @@ import { useFloorRandom } from '../../hooks';
 const Lights = ({ short }) => {
   const amount = new Array(useFloorRandom(2) + 3);
   const lights = [...amount.keys()];
+  console.log(short);
   const Node = short ? LightsShortNode : LightsNode;
   return lights.map((key) => <Node key={key} />);
 };
