@@ -104,6 +104,19 @@ export const LightsNode = styled.div`
       0 0 300px 0px #56DDED;
 `;
 
+export const IndoorLightNode = styled.div`
+    width: 100px;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+
+    box-shadow:
+      0 0 30px 5px #56DDED,
+      0 0 30px 5px #fff,
+      0 0 200px 15px #56DDED,
+      0 0 200px 15px #fff;
+`;
+
 export const Antenna = styled.div`
     width: ${({ width = 3 }) => width}px;
     top: ${({ height }) => -height}px;

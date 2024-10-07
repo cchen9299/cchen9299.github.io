@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GLASS } from '../../hooks/constants';
+import { GLASS } from '../../../hooks/constants';
+import IndoorLight from '../../common/IndoorLight';
 
 const Wrapper = styled.div`
     flex-grow: 1;
@@ -9,15 +10,26 @@ const Wrapper = styled.div`
     position: relative;
 `;
 
+const LightWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 10000;
+`;
+
 const Panel = styled.div`
     position: relative;
     background-color: #26345C;
     border-top: 5px solid #33426E;
     border-right: 5px solid #33426E;
-    border-bottom: 5px solid black;
-    border-left: 5px solid #101D43;
+    border-bottom: 5px solid #1C2A52;
+    border-left: 5px solid #1C2A52;
     box-sizing: border-box;
     height: 100%;
+    width: 100%;
 `;
 
 const Window = styled.div`
@@ -47,15 +59,23 @@ export default function FramedWindow({
   count,
   glow,
   replacedIndex = [],
+  lightsIndex = [],
 }) {
   const amount = new Array(count);
   const arr = [...amount.keys()];
 
   return arr.map((_, i) => {
     const hasSub = replacedIndex.includes(i);
+    const hasLights = lightsIndex.includes(i);
     const Node = hasSub ? Window : Panel;
     return (
       <Wrapper key={`panel-${i}`}>
+        {hasLights
+        && (
+        <LightWrapper>
+          <IndoorLight />
+        </LightWrapper>
+        )}
         {hasSub && <WindowFrame />}
         <Node glow={glow[i]} style={{ zIndex: hasSub ? 1 : -1 }} />
       </Wrapper>

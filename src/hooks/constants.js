@@ -14,3 +14,13 @@ export const GLASS = `
         rgba(108,247,245,0) 100%
     )
 `;
+
+export const GLASS_B = `
+    linear-gradient(160deg, 
+        rgba(255,247,245,0.3) 0%, 
+        rgba(145,249,247,0.15) 30%,
+        rgba(145,249,247,0.15) 40%,
+        rgba(255,255,255,0.3) 40%,
+        rgba(108,247,245,0) 100%
+    )
+`;

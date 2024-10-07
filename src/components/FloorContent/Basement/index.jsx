@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import FramedWindow from './FramedWindow';
+import Airduct from './Airduct';
+import Server from './Server';
 
 const Wrapper = styled.div`
   position: relative;
@@ -18,10 +20,12 @@ const PanelContainer = styled.div`
 export default function Basement() {
   return (
     <Wrapper>
+      <Airduct />
       <PanelContainer>
         <FramedWindow
           count={30}
           replacedIndex={[0, 2, 4]}
+          lightsIndex={[7, 9, 11]}
           glow={{
             0: '0 0 250px 0 #FF00FF',
             2: '0 0 250px 0 #F2F100',
@@ -29,6 +33,16 @@ export default function Basement() {
           }}
         />
       </PanelContainer>
+      <div style={{
+        position: 'absolute', bottom: 0, display: 'flex', zIndex: 1, left: '200px',
+      }}
+      >
+        <Server />
+        <Server />
+        <Server />
+        <Server />
+        <Server />
+      </div>
     </Wrapper>
   );
 }
