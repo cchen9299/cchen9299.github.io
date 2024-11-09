@@ -52,7 +52,7 @@ export const FloatingButton = styled.button`
   background-color: orange;
   z-index: 1000;
   position: absolute;
-  border: none
+  border: none;
 `;
 
 export const Screen = styled.div`

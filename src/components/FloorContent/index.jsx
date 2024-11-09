@@ -1,4 +1,5 @@
 import React from 'react';
+import { number } from 'prop-types';
 import Roof from './Roof';
 import Bar from './Basement';
 import Bedroom from './Bedroom';
@@ -17,3 +18,7 @@ export default function FloorContent({ level }) {
     <Floor />
   );
 }
+
+FloorContent.propTypes = {
+  level: number.isRequired,
+};

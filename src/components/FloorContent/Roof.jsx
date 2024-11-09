@@ -14,7 +14,7 @@ const Railing = styled.div`
     position: absolute;
     bottom: 80px;
     background-color: #101D43;
-    border-top: $101D43;
+    border-top: #101D43;
 `;
 
 const Glass = styled.div`
@@ -22,7 +22,7 @@ const Glass = styled.div`
     flex: 1;
     margin-left: 3px;
     height: 80px;
-    background: ${GLASS}
+    background: ${GLASS};
 `;
 
 // const UpperFloor = styled.div`
