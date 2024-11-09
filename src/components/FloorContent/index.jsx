@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import Roof from './Roof';
 import Bar from './Basement';
 import Bedroom from './Bedroom';

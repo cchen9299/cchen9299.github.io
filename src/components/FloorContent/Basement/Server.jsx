@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Shelf from './Shelf';
-import { GLASS, GLASS_B } from '../../../hooks/constants';
+import { GLASS_B } from '../../../hooks/constants';
 
 const Stack = styled.div`
     position: relative;

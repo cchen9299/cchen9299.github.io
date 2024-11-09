@@ -4,7 +4,7 @@ import { useFloorRandom } from '../../../hooks';
 
 const ShelfNode = styled.div`
     width: 120px;
-    height: 40px;
+    height: 30px;
     background-color: #101D43;
 
     border: 5px solid #1C2A52;
@@ -13,13 +13,13 @@ const ShelfNode = styled.div`
 `;
 
 export const ServerLights = styled.div`
-    height: 3px;
+    height: 2px;
     width: ${() => `${useFloorRandom(useFloorRandom(3) + 50) + 10}%`};
     background-color: #56DDED;
     position: relative;
     margin-left: ${() => `${useFloorRandom(50) + 10}%`};
-    top: 5px;
-    margin-top:5px;
+    top: 4px;
+    margin-top:4px;
 
     box-shadow:
       0 0 20px 2px #56DDED,

@@ -7,7 +7,6 @@ import ForthLayer from './ForthLayer';
 import ThirdLayer from './ThirdLayer';
 import { CINEMATIC_COVER_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
 import FloorContent from './FloorContent';
-import SecondLayer from './SecondLayer';
 
 const Floor = styled.div`
     height: 100vh;
@@ -62,6 +61,7 @@ export default function Container() {
           {levelFromRoof !== 0 && <Ceiling lastLevels={levelFromRoof > 2} />}
         </Floor>
       ))}
+      <Ceiling />
     </ContainerNode>
   );
 }

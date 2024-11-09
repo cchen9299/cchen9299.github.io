@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import FramedWindow from './FramedWindow';
 import Airduct from './Airduct';
 import Server from './Server';
+import Couch from './Couch';
+import Desk from './Desk';
 
 const Wrapper = styled.div`
   position: relative;
@@ -33,15 +35,28 @@ export default function Basement() {
           }}
         />
       </PanelContainer>
-      <div style={{
-        position: 'absolute', bottom: 0, display: 'flex', zIndex: 1, left: '200px',
-      }}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          display: 'flex',
+          zIndex: 1,
+          left: '5vw',
+        }}
       >
         <Server />
         <Server />
         <Server />
         <Server />
-        <Server />
+      </div>
+      <div style={{
+        // width: '100%',
+        // height: '100%',
+        // bottom: 0,
+      }}
+      >
+        <Couch />
+        <Desk />
       </div>
     </Wrapper>
   );
