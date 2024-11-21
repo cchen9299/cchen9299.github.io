@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -161,7 +162,7 @@ export default function GlassRow({ type }) {
 }
 
 GlassRow.propTypes = {
-  type: 'string',
+  type: string,
 };
 
 GlassRow.defaultProps = {

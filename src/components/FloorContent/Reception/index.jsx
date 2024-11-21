@@ -49,8 +49,8 @@ const CloudContainer = styled.div`
     position: absolute;
     top: calc(45% - 50px);
     left: 180px;
-    transform: scale(${({ scaleRatio }) => scaleRatio});
-    -webkit-transform: scale(${({ scaleRatio }) => scaleRatio});
+    transform: scale(${({ ratio }) => ratio});
+    -webkit-transform: scale(${({ ratio }) => ratio});
 `;
 
 const BottomBoothContainer = styled.div`
@@ -73,16 +73,16 @@ const ChandelierContainer = styled.div`
 
 export default function Reception() {
   const { sceneRefs: { containerRef } } = useStore();
-  const [scaleRatio, setScaleRatio] = useState(1);
+  const [ratio, setratio] = useState(1);
   useEffect(() => {
-    setScaleRatio(containerRef.current.clientHeight / 1080);
+    setratio(containerRef.current.clientHeight / 1080);
   }, [containerRef]);
 
   return (
     <Wrapper>
       <GlassFacade />
       <Top>
-        <CloudContainer scaleRatio={scaleRatio}>
+        <CloudContainer ratio={ratio}>
           <CloudLights />
           <CloudLights style={{ top: '10%' }} />
           <CloudLights style={{ top: '25%' }} />
