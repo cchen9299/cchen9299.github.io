@@ -43,7 +43,8 @@ const keyToAction = {
   38: 'up',
   83: 'down',
   40: 'down',
-  70: 'f',
+  70: 'interact',
+  13: 'interact',
 };
 
 const DoorLeft = styled.div`
@@ -56,6 +57,11 @@ const DoorRight = styled(DoorLeft)`
   border-left: 5px solid #101D43;
   -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1);
+`;
+
+const ListContainer = styled.div`
+  position: relative;
+  z-index: 1;
 `;
 
 export default function Elevator({ level }) {
@@ -84,7 +90,7 @@ export default function Elevator({ level }) {
           setMenuSelection(floorList[selectionIndex + 1]);
         }
         break;
-      case 'f':
+      case 'interact':
         if (floorList.includes(menuSelection)) {
           const {
             elevationTop: destinationTop,
@@ -142,19 +148,21 @@ export default function Elevator({ level }) {
           Take Elevator
         </FloatingButton>
         )}
-      {floorList.includes(menuSelection) && floorList.map(({ title, subtitle }) => (
-        <div key={title + subtitle}>
-          <button
-            type="button"
-            style={{
-              backgroundColor: menuSelection.title === title ? 'skyblue' : '',
-            }}
-          >
-            <p>{title}</p>
-            <p>{subtitle}</p>
-          </button>
-        </div>
-      ))}
+      <ListContainer>
+        {floorList.includes(menuSelection) && floorList.map(({ title, subtitle }) => (
+          <div key={title + subtitle}>
+            <button
+              type="button"
+              style={{
+                backgroundColor: menuSelection.title === title ? 'skyblue' : '',
+              }}
+            >
+              <p>{title}</p>
+              <p>{subtitle}</p>
+            </button>
+          </div>
+        ))}
+      </ListContainer>
     </ElevatorNode>
   );
 }

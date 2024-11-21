@@ -8,6 +8,7 @@ const CharacterNode = styled(ParallaxLayer)`
   width: 70px;
   background-color: black;
   position: absolute;
+  z-index: 100000;
 
   left: ${({ x }) => x}vw;
   top: ${({ y }) => `calc(${y})`};

@@ -1,14 +1,15 @@
 import React from 'react';
+import { number } from 'prop-types';
 import Roof from './Roof';
-import Bar from './Basement';
+import Basement from './Basement';
+import Reception from './Reception';
 import Bedroom from './Bedroom';
-import Office from './Office';
 
 const FloorContentMap = {
   0: Roof,
   1: Bedroom,
-  2: Office,
-  3: Bar,
+  2: Reception,
+  3: Basement,
 };
 
 export default function FloorContent({ level }) {
@@ -17,3 +18,7 @@ export default function FloorContent({ level }) {
     <Floor />
   );
 }
+
+FloorContent.propTypes = {
+  level: number.isRequired,
+};
