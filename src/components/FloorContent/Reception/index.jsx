@@ -4,6 +4,7 @@ import GlassFacade from '../../common/GlassFacade';
 import Booth from './Booth';
 import CloudLights from '../../common/CloudLights';
 import Bar from './Bar';
+import Chandelier from '../../common/Chandelier';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -47,15 +48,26 @@ const CloudContainer = styled.div`
     position: absolute;
     top: calc(45% - 50px);
     left: 180px;
+    transform: scale(${({ scaleRatio }) => scaleRatio});
+    -webkit-transform: scale(${({ scaleRatio }) => scaleRatio});
 `;
 
 const BottomBoothContainer = styled.div`
     position: absolute;
     bottom: 5px;
     right:0;
-    height: 10px;
+    height: 100%;
     width: 850px;
     z-index: -1;
+`;
+
+const ChandelierContainer = styled.div`
+  position: absolute;
+  bottom: 120px;
+  right: ${({ right = '100px' }) => right};
+
+  height: 50%;
+  width: 100px;
 `;
 
 export default function Reception() {
@@ -65,7 +77,7 @@ export default function Reception() {
     <Wrapper>
       <GlassFacade />
       <Top>
-        <CloudContainer style={{ transform: `scale(${scaleRatio})` }}>
+        <CloudContainer scaleRatio={scaleRatio}>
           <CloudLights />
           <CloudLights style={{ top: '10%' }} />
           <CloudLights style={{ top: '25%' }} />
@@ -83,6 +95,15 @@ export default function Reception() {
       </Top>
       <Bottom id="bedroom-bottom">
         <BottomBoothContainer>
+          <ChandelierContainer>
+            <Chandelier />
+          </ChandelierContainer>
+          <ChandelierContainer right="350px">
+            <Chandelier />
+          </ChandelierContainer>
+          <ChandelierContainer right="600px">
+            <Chandelier />
+          </ChandelierContainer>
           <Booth />
           <Booth left="250px" />
           <Booth left="500px" />
