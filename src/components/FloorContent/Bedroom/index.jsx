@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import GlassFacade from '../../common/GlassFacade';
 import Bed from './Bed';
@@ -55,6 +55,8 @@ const ChandelierContainer = styled.div`
 `;
 
 export default function Bedroom() {
+  const bedroomBottomRef = useRef();
+
   return (
     <Wrapper>
       <GlassFacade />
@@ -62,8 +64,8 @@ export default function Bedroom() {
         <Bed />
         <Floor />
       </Top>
-      <Bottom id="bedroom-bottom">
-        <Stairs />
+      <Bottom ref={bedroomBottomRef}>
+        <Stairs bedroomBottomRef={bedroomBottomRef} />
         <Kitchen />
         <LivingRoom>
           <ChandelierContainer>

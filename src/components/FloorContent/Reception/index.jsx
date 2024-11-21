@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GlassFacade from '../../common/GlassFacade';
 import Booth from './Booth';
 import CloudLights from '../../common/CloudLights';
 import Bar from './Bar';
 import Chandelier from '../../common/Chandelier';
+import useStore from '../../../Store';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -71,7 +72,11 @@ const ChandelierContainer = styled.div`
 `;
 
 export default function Reception() {
-  const scaleRatio = window.innerWidth / 1980;
+  const { sceneRefs: { containerRef } } = useStore();
+  const [scaleRatio, setScaleRatio] = useState(1);
+  useEffect(() => {
+    setScaleRatio(containerRef.current.clientHeight / 1080);
+  }, [containerRef]);
 
   return (
     <Wrapper>
