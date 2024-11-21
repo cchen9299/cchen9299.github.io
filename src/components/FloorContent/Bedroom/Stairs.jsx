@@ -21,26 +21,26 @@ const Wrapper = styled.div`
 const getTreadMap = (treadCount) => {
   const treadMap = [];
   for (let i = 0; i <= treadCount; i += 1) {
-    treadMap.push(<Tread count={i} />);
+    treadMap.push(<Tread count={i} key={`tread-number-${i}`} />);
   }
   return treadMap;
 };
 
 export default function Stairs({ bedroomBottomRef }) {
-  const bottomHeight = bedroomBottomRef.current?.clientHeight || 0;
+  const bottomHeight = bedroomBottomRef?.current?.clientHeight || 0;
   const treadCount = Math.floor(bottomHeight / 20);
 
   return (
     <Wrapper>
-      {getTreadMap(treadCount).map((TreadNode) => TreadNode)}
+      {getTreadMap(treadCount)}
     </Wrapper>
   );
 }
 
 Stairs.propTypes = {
-  bedroomBottomRef: shape({ current: {} }),
+  bedroomBottomRef: shape({}),
 };
 
 Stairs.defaultProps = {
-  bedroomBottomRef: { current: {} },
+  bedroomBottomRef: {},
 };

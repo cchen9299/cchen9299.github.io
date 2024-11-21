@@ -53,10 +53,10 @@ export default function Bar() {
     setRowCount(Math.floor(accentRef.current.clientHeight) / 50);
   }, []);
 
-  const renderRows = () => {
+  const renderRows = (accentNumber) => {
     const list = [];
     for (let i = 2; i <= rowCount; i += 1) {
-      list.push(<BottleRow />);
+      list.push(<BottleRow key={`bottle-col-${accentNumber}-row-number-${i}`} />);
     }
     return list;
   };
@@ -65,19 +65,19 @@ export default function Bar() {
     <Wrapper>
       <Top>
         <Accent ref={accentRef} fill="#51FFCB">
-          {renderRows()}
+          {renderRows(0)}
           <GlassRow type="Stein" />
         </Accent>
         <Accent fill="#51DCFF">
-          {renderRows()}
+          {renderRows(1)}
           <GlassRow type="Wine" />
         </Accent>
         <Accent fill="#51A5FF">
-          {renderRows()}
+          {renderRows(2)}
           <GlassRow type="Champagne" />
         </Accent>
         <Accent fill="#6351FF">
-          {renderRows()}
+          {renderRows(3)}
           <GlassRow type="LowBall" />
         </Accent>
       </Top>

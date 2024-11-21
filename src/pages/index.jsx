@@ -1,22 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
+import styled, { StyleSheetManager } from 'styled-components';
 import '../styles.css';
 import { Store } from '../Store';
 import Container from '../components/Container';
 import { CINEMATIC_COVER_HEIGHT } from '../hooks/constants';
 // import UserInterface from '../components/UserInterface';
 
-const IndexPage = () => (
-  <Store>
-    <main>
+function shouldForwardProp(propName, target) {
+  if (typeof target === 'string') {
+    return isPropValid(propName);
+  }
+  return true;
+}
 
-      {/* <Blocker /> */}
-      <Cover />
-      <Container />
-      {/* <UserInterface /> */}
-      <Cover style={{ bottom: 0 }} />
-    </main>
-  </Store>
+const IndexPage = () => (
+  <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+    <Store>
+      <main>
+
+        {/* <Blocker /> */}
+        <Cover />
+        <Container />
+        {/* <UserInterface /> */}
+        <Cover style={{ bottom: 0 }} />
+      </main>
+    </Store>
+  </StyleSheetManager>
 );
 
 export default IndexPage;
