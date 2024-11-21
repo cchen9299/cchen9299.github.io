@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BarStool from './Barstool';
+import BarStool from './BarStool';
 
 const Wrapper = styled.div`
     display:flex;
@@ -77,6 +77,16 @@ const AccentGlow = styled.div`
         0 0 50px 2px #0FF;
 `;
 
+const BarStoolContainer = styled.div`
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    position: absolute;
+    width: 60%;
+    bottom: 0;
+    z-index: 100;
+`;
+
 export default function Island() {
   return (
     <Wrapper>
@@ -89,14 +99,13 @@ export default function Island() {
           <IslandAccent />
           <AccentGlow />
         </AccentContainer>
+        <BarStoolContainer>
+          <BarStool />
+          <BarStool />
+          <BarStool />
+          <BarStool />
+        </BarStoolContainer>
       </IslandContainer>
-      <div style={{
-        position: 'absolute',
-        right: 0,
-      }}
-      >
-        <BarStool />
-      </div>
     </Wrapper>
   );
 }

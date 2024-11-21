@@ -49,12 +49,7 @@ export default function Basement() {
         <Server />
         <Server />
       </div>
-      <div style={{
-        // width: '100%',
-        // height: '100%',
-        // bottom: 0,
-      }}
-      >
+      <div>
         <Couch />
         <Desk />
       </div>

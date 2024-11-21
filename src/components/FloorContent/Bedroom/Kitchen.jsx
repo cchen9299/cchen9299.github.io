@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Island from './Island';
+import Chandelier from '../../common/Chandelier';
 
 const UpperCabinet = styled.div`
     background-color: #465A93;
@@ -20,7 +21,7 @@ const UpperContainer = styled.div`
 const LowerContainer = styled.div`
     background-color: #1C344E;
     height: 190px;
-    width: 100%;
+    width: 368px;
     display: flex;
     justify-content: space-between;
 `;
@@ -95,38 +96,63 @@ const Wrapper = styled.div`
     position: relative;
     left: 150px;
     border-left: 4px solid #1D2641;
+    display: flex;
+`;
+
+const Wall = styled.div`
+  height: 100%;
+  width: 45px;
+  background-color: #142538;
+  border-right: 8px solid #375B83;
+  z-index: -1;
+`;
+
+const ChandelierContainer = styled.div`
+  position: absolute;
+  bottom: 120px;
+  left: 60%;
+
+  height: 50%;
+  width: 100px;
+  z-index: 100;
 `;
 
 export default function Kitchen() {
   return (
     <Wrapper>
-      <UpperContainer>
-        <UpperCabinet />
-        <UpperCabinet />
-        <UpperCabinet />
-        <UpperCabinet />
-      </UpperContainer>
-      <LowerContainer>
-        <LeftCabinet>
-          <ApplianceContainer>
-            <Appliance>
-              <ApplianceGlass />
-            </Appliance>
-            <Appliance>
-              <ApplianceGlass />
-            </Appliance>
-          </ApplianceContainer>
-        </LeftCabinet>
-        <Glow />
-        <FridgeContainer>
-          <FridgeLeft />
-          <div>
-            <FridgeDoor />
-            <FridgeDoor />
-          </div>
-        </FridgeContainer>
-        <Island />
-      </LowerContainer>
+      <div style={{ height: '100%' }}>
+        <UpperContainer>
+          <UpperCabinet />
+          <UpperCabinet />
+          <UpperCabinet />
+          <UpperCabinet />
+          <ChandelierContainer>
+            <Chandelier />
+          </ChandelierContainer>
+        </UpperContainer>
+        <LowerContainer>
+          <LeftCabinet>
+            <ApplianceContainer>
+              <Appliance>
+                <ApplianceGlass />
+              </Appliance>
+              <Appliance>
+                <ApplianceGlass />
+              </Appliance>
+            </ApplianceContainer>
+          </LeftCabinet>
+          <Glow />
+          <FridgeContainer>
+            <FridgeLeft />
+            <div>
+              <FridgeDoor />
+              <FridgeDoor />
+            </div>
+          </FridgeContainer>
+          <Island />
+        </LowerContainer>
+      </div>
+      <Wall />
     </Wrapper>
   );
 }
