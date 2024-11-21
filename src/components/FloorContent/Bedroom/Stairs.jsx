@@ -1,3 +1,4 @@
+import { shape } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -25,8 +26,8 @@ const getTreadMap = (treadCount) => {
   return treadMap;
 };
 
-export default function Stairs() {
-  const bottomHeight = document.querySelector('#bedroom-bottom')?.clientHeight || 0;
+export default function Stairs({ bedroomBottomRef }) {
+  const bottomHeight = bedroomBottomRef.current?.clientHeight || 0;
   const treadCount = Math.floor(bottomHeight / 20);
 
   return (
@@ -35,3 +36,11 @@ export default function Stairs() {
     </Wrapper>
   );
 }
+
+Stairs.propTypes = {
+  bedroomBottomRef: shape({ current: {} }),
+};
+
+Stairs.defaultProps = {
+  bedroomBottomRef: { current: {} },
+};
