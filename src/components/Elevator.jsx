@@ -3,18 +3,22 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import { number } from 'prop-types';
-import { FloatingButton, ParallaxLayer } from '../styledComponents';
+import { FloatingButton, ParallaxLayer } from './Background/styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import { getElevationBounds } from '../hooks/utils';
 import { getMoveFloorCalc } from '../hooks/constants';
+import { Highlight } from './common/styledComponents';
 
 export const ElevatorNode = styled(ParallaxLayer)`
   min-height: 235px;
   height: ${({ isTopLevel }) => (isTopLevel ? 'inherit' : 100)}%;
   width: 150px;
-  background-color: #1C344E;
-  z-index: 1000;
+  z-index: 100;
   bottom:0;
+  position: absolute;
+
+  display: flex;
+  flex-direction: column-reverse;
 `;
 
 const ElevatorText = styled.div`
@@ -36,6 +40,8 @@ const ElevatorText = styled.div`
     0 0 10px #FFF,
     0 0 10px #F0F,
     0 0 50px #F0F;
+  position: relative;
+  bottom: 50px;
 `;
 
 const keyToAction = {
@@ -49,8 +55,8 @@ const keyToAction = {
 
 const DoorLeft = styled.div`
   background-color: #33426E;
-  width: 70px;
-  height: 200px;
+  width: 55px;
+  height: 180px;
 `;
 
 const DoorRight = styled(DoorLeft)`
@@ -60,8 +66,8 @@ const DoorRight = styled(DoorLeft)`
 `;
 
 const ListContainer = styled.div`
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 10000;
 `;
 
 export default function Elevator({ level }) {
@@ -129,19 +135,13 @@ export default function Elevator({ level }) {
   return (
     <ElevatorNode ref={ref} isTopLevel={level === 0}>
       <div
-        style={{
-          display: 'flex',
-          position: 'absolute',
-          bottom: 0,
-          left: -10,
-        }}
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
+        <Highlight height="205px" width="140px" bottom="-10px" left="5px" />
         <DoorLeft style={{ marginRight: 2 }} />
         <DoorRight />
       </div>
-      <div style={{ position: 'absolute', bottom: 235 }}>
-        <ElevatorText>Elevator {level}</ElevatorText>
-      </div>
+      <ElevatorText>Elevator {level}</ElevatorText>
       {menuSelection === 'TOOLTIP'
         && (
         <FloatingButton style={{ top: 100 }}>

@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     position: relative;
     bottom: 5px;
+    left: 20px;
 `;
 
 const Headboard = styled.div`

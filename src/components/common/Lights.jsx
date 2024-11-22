@@ -1,5 +1,5 @@
 import React from 'react';
-import { LightsNode, LightsShortNode } from '../../styledComponents';
+import { LightsNode, LightsShortNode } from '../Background/styledComponents';
 import { useFloorRandom } from '../../hooks';
 
 const Lights = ({ short }) => {

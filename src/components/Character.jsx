@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { ParallaxLayer } from '../styledComponents';
+import { ParallaxLayer } from './Background/styledComponents';
 import { useCharacterActions } from '../hooks';
 
 const CharacterNode = styled(ParallaxLayer)`

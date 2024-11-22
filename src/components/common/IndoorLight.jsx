@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndoorLightNode } from '../../styledComponents';
+import { IndoorLightNode } from '../Background/styledComponents';
 import { useFloorRandom } from '../../hooks';
 
 const IndoorLight = () => {

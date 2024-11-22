@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Character from './Character';
 import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
-import ForthLayer from './ForthLayer';
-import ThirdLayer from './ThirdLayer';
+import ForthLayer from './Background/ForthLayer';
+import ThirdLayer from './Background/ThirdLayer';
 import { CINEMATIC_COVER_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
 import FloorContent from './FloorContent';
 
@@ -36,7 +36,6 @@ const Space = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  z-index: -1;
 `;
 
 export default function Container() {

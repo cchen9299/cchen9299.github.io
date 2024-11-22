@@ -5,8 +5,8 @@ import {
   Screen,
   Antenna,
   Fog,
-} from '../../styledComponents';
-import Tower from '../common/Tower';
+} from '../styledComponents';
+import Tower from '../../common/Tower';
 
 export const FarBox = styled.div`
   height: 200vh;
