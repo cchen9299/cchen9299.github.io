@@ -71,5 +71,6 @@ const ContainerNode = styled.div`
   perspective: 300px;
   overflow-y: ${({ isImmersive }) => (isImmersive ? 'hidden' : 'scroll')};
   overflow-x: hidden;
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(7, 18, 32, 0.7) rgb(13, 30, 48);
 `;

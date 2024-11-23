@@ -5,44 +5,26 @@ import SecondaryButton from '../common/SecondaryButton';
 import Context from './Context';
 import Settings from './Settings';
 import Button from '../common/Button';
-
-// const Interface = styled.div`
-//   height: calc(96vh - (${CINEMATIC_COVER_HEIGHT} * 2));
-//   width: 100%;
-//   background-color: rgba(0,102,255,0.5);
-//   backdrop-filter: blur(20px);
-
-//   box-shadow:
-//     inset 0 0 20px 5px #F0F,
-//     0 0 5px 2px #FFF,
-//     0 0 5px 2px #F0F,
-//     0 0 50px 5px #F0F;
-// `;
-
-// const InterfaceContainer = styled.div`
-//   width: 36vw;
-//   height: 100%;
-//   position: fixed;
-//   right: 2vw;
-//   top: calc(${CINEMATIC_COVER_HEIGHT} + 2vh);
-// `;
+import useStore from '../../Store';
 
 const InterfaceContainer = styled.div`
-  background-color: rgba(0, 64, 142, 0.5);
-  border: 2px solid rgb(32, 117, 214);
-  height: calc(96vh - (${CINEMATIC_COVER_HEIGHT} * 2) - 30px);
-  backdrop-filter: blur(20px);
+    background-color: rgba(0, 64, 142, 0.5);
+    border: 2px solid rgb(32, 117, 214);
+    backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: ${({ isImmersive }) => `calc(96vh - (${isImmersive ? CINEMATIC_COVER_HEIGHT : '0px'} * 2) - 30px)`};
 `;
 
 const Wrapper = styled.div`
-    width: 36vw;
+    @media (min-width: 1513px) {
+        width: 38vw;
+    }
+    width: 45vw;
     position: fixed;
-    margin-right: 2vw;
-    right: 0;
-    top: calc(${CINEMATIC_COVER_HEIGHT} + 1vh);
+    right: 1vw;
+    top: ${({ isImmersive }) => `calc(${isImmersive ? CINEMATIC_COVER_HEIGHT : '0px'} + 1vh)`};
 `;
 
 const MenuContainer = styled.div`
@@ -64,6 +46,7 @@ const interfaceMap = {
 };
 
 export default function UserInterface() {
+  const { isImmersive } = useStore();
   const [interfaceSelection, setInterfaceSelection] = useState('context');
   const onInterfaceSelection = useCallback((id) => {
     setInterfaceSelection((cur) => (cur === id ? null : id));
@@ -72,7 +55,7 @@ export default function UserInterface() {
   const Interface = interfaceMap[interfaceSelection];
 
   return (
-    <Wrapper>
+    <Wrapper isImmersive={isImmersive}>
       <MenuContainer>
         {menuList.map(({ title, id }) => (
           <SecondaryButton
@@ -85,9 +68,9 @@ export default function UserInterface() {
           />
         ))}
       </MenuContainer>
-      <InterfaceContainer style={{ display: interfaceSelection ? 'flex' : 'none' }}>
+      <InterfaceContainer isImmersive={isImmersive} style={{ display: interfaceSelection ? 'flex' : 'none' }}>
         <Interface setInterfaceSelection={setInterfaceSelection} />
-        <div style={{ maxWidth: 300, margin: 20 }}>
+        <div style={{ maxWidth: 300, margin: 10 }}>
           <Button text="close" onClick={() => setInterfaceSelection(null)} />
         </div>
       </InterfaceContainer>

@@ -8,7 +8,8 @@ import BasementInterface from './BasementInterface';
 
 const Wrapper = styled.div`
     color: rgb(104, 166, 238);
-    margin: 20px;
+    padding: 1ch;
+    height: 100%;
 `;
 
 const contextMap = {

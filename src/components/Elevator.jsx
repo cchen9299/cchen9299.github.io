@@ -83,6 +83,7 @@ const ListContainer = styled.div`
   flex-grow: 1;
   width: 300px;
   padding: 10px;
+  backdrop-filter: blur(20px);
 
   background-color: rgba(0, 64, 142, 0.5);
   border: 2px solid rgb(32, 117, 214);

@@ -21,16 +21,16 @@ const SubtextWrapper = styled.h6`
 const Wrapper = styled.div`
     height: 50px;
     border: 2px solid rgb(32, 117, 214);
-    background-color: ${({ isActive }) => (isActive ? 'rgba(86, 137, 200, 0.9)' : 'rgba(0, 64, 142, 0.9)')};
+    background-color: ${({ isActive }) => (isActive ? 'rgba(86, 137, 200, 0.7)' : 'rgba(0, 64, 142, 0.7)')};
     &:hover{
-        background-color: rgba(86, 137, 200, 0.9);
+        background-color: rgba(86, 137, 200, 0.7);
     }
-    padding: 10px 10px;
+    padding: 0 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
-    clip-path: polygon(300px 0px, 300px 53px, 279px 74px, 0px 74px, 0px 0px);
+    clip-path: polygon(300px 0px, 300px 33px, 279px 54px, 0px 54px, 0px 0px);
     position: relative;
     cursor: pointer;
 
