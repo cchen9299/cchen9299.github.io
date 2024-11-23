@@ -62,7 +62,7 @@ export default function useCharacterActions({ characterRef, speed = 0.5 }) {
         } else if (state && checkCollision(characterRef, ref)) {
           // do nothing
         } else {
-          setState(null);
+          // setState(null);
         }
       });
 

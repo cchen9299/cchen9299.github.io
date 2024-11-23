@@ -7,7 +7,7 @@ import Couch from './Couch';
 import Desk from './Desk';
 
 const Wrapper = styled.div`
-  position: relative;
+  position: absolute;
   width: 100vw;
   height: 100%;
   overflow: hidden;

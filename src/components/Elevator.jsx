@@ -3,11 +3,12 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import { number } from 'prop-types';
-import { FloatingButton, ParallaxLayer } from './Background/styledComponents';
+import { ParallaxLayer } from './Background/styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import { getElevationBounds } from '../hooks/utils';
 import { getMoveFloorCalc } from '../hooks/constants';
-import { Highlight } from './common/styledComponents';
+import TooltipButton from './common/TooltipButton';
+import Button from './common/Button';
 
 export const ElevatorNode = styled(ParallaxLayer)`
   min-height: 235px;
@@ -19,10 +20,17 @@ export const ElevatorNode = styled(ParallaxLayer)`
 
   display: flex;
   flex-direction: column-reverse;
+  cursor: pointer;
+
+  &:hover #elevator-tooltip {
+    display: flex !important;
+  }
 `;
 
 const ElevatorText = styled.div`
-  padding: 10px;
+  flex-grow: 0;
+  align-self: center;
+  padding: 5px;
   border: 2px solid;
   border-radius: 5px;
   border-color: #FFD3FF;
@@ -33,7 +41,8 @@ const ElevatorText = styled.div`
     0 0 5px 2px #F0F,
     0 0 50px 5px #F0F;
 
-  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-size: 12px;
   font-family: "Orbitron", sans-serif;
   color: #FFD3FF;
   text-shadow: 
@@ -41,7 +50,7 @@ const ElevatorText = styled.div`
     0 0 10px #F0F,
     0 0 50px #F0F;
   position: relative;
-  bottom: 50px;
+  bottom: 15px;
 `;
 
 const keyToAction = {
@@ -49,8 +58,8 @@ const keyToAction = {
   38: 'up',
   83: 'down',
   40: 'down',
-  70: 'interact',
-  13: 'interact',
+  70: 'enter',
+  13: 'enter',
 };
 
 const DoorLeft = styled.div`
@@ -68,6 +77,15 @@ const DoorRight = styled(DoorLeft)`
 const ListContainer = styled.div`
   position: absolute;
   z-index: 10000;
+  bottom: 180px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 300px;
+  padding: 10px;
+
+  background-color: rgba(0, 64, 142, 0.5);
+  border: 2px solid rgb(32, 117, 214);
 `;
 
 export default function Elevator({ level }) {
@@ -76,11 +94,11 @@ export default function Elevator({ level }) {
     interactableRefs: { character },
     sceneRefs: { containerRef },
     dispatchInteractableRefs,
+    setCurrentLevel,
   } = useStore();
   const {
     floorList,
   } = useElevatorStore();
-
   const [menuSelection, setMenuSelection] = useState(null);
 
   const onKeyDown = useCallback(({ keyCode }) => {
@@ -96,7 +114,7 @@ export default function Elevator({ level }) {
           setMenuSelection(floorList[selectionIndex + 1]);
         }
         break;
-      case 'interact':
+      case 'enter':
         if (floorList.includes(menuSelection)) {
           const {
             elevationTop: destinationTop,
@@ -104,6 +122,7 @@ export default function Elevator({ level }) {
           containerRef.current.scrollTo(0, destinationTop);
           character.setY(getMoveFloorCalc(selectionIndex));
           setMenuSelection(null);
+          setCurrentLevel(selectionIndex);
         } else {
           setMenuSelection(floorList[level]);
         }
@@ -114,9 +133,31 @@ export default function Elevator({ level }) {
     level,
     character,
     setMenuSelection,
+    setCurrentLevel,
     menuSelection,
     containerRef,
     floorList,
+  ]);
+
+  const onElevatorClick = useCallback(() => {
+    setMenuSelection(floorList[level]);
+  }, [
+    floorList,
+    level,
+    setMenuSelection,
+  ]);
+
+  const onMenuSelection = useCallback((id) => {
+    const { elevationTop: destinationTop } = getElevationBounds(id);
+    containerRef.current.scrollTo(0, destinationTop);
+    character.setY(getMoveFloorCalc(id));
+    setMenuSelection(null);
+    setCurrentLevel(id);
+  }, [
+    character,
+    containerRef,
+    setMenuSelection,
+    setCurrentLevel,
   ]);
 
   useEffect(() => {
@@ -130,40 +171,39 @@ export default function Elevator({ level }) {
         [floorList[level].refKey]: { ref, state: menuSelection, setState: setMenuSelection },
       });
     }
-  }, [menuSelection, ref, floorList, dispatchInteractableRefs, level]);
+  }, [menuSelection, ref, floorList, dispatchInteractableRefs, level, setMenuSelection]);
 
   return (
-    <ElevatorNode ref={ref} isTopLevel={level === 0}>
-      <div
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <Highlight height="205px" width="140px" bottom="-10px" left="5px" />
-        <DoorLeft style={{ marginRight: 2 }} />
-        <DoorRight />
-      </div>
-      <ElevatorText>Elevator {level}</ElevatorText>
-      {menuSelection === 'TOOLTIP'
-        && (
-        <FloatingButton style={{ top: 100 }}>
-          Take Elevator
-        </FloatingButton>
-        )}
-      <ListContainer>
-        {floorList.includes(menuSelection) && floorList.map(({ title, subtitle }) => (
-          <div key={title + subtitle}>
-            <button
-              type="button"
-              style={{
-                backgroundColor: menuSelection.title === title ? 'skyblue' : '',
-              }}
-            >
-              <p>{title}</p>
-              <p>{subtitle}</p>
-            </button>
-          </div>
-        ))}
-      </ListContainer>
-    </ElevatorNode>
+    <>
+      <ElevatorNode ref={ref} isTopLevel={level === 0} onClick={onElevatorClick}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {/* <Highlight height="205px" width="140px" bottom="-10px" left="5px" /> */}
+          <DoorLeft style={{ marginRight: 2 }} />
+          <DoorRight />
+        </div>
+        <ElevatorText>Elevator</ElevatorText>
+        <TooltipButton id="elevator-tooltip" actionKey="F" text="Take Elevator" style={{ display: menuSelection === 'TOOLTIP' ? 'flex' : 'none' }} />
+
+      </ElevatorNode>
+      {floorList.includes(menuSelection) && (
+        <ListContainer>
+          {floorList.map(({
+            title, subtitle, floor, levelFromRoof,
+          }) => (
+            <Button
+              id={levelFromRoof}
+              key={title + subtitle}
+              text={title}
+              subtext={`0${floor} ${subtitle}`}
+              isActive={menuSelection.title === title}
+              onClick={onMenuSelection}
+              style={{ marginBottom: 10 }}
+            />
+          ))}
+          <Button id="elevator-close" text="Close" onClick={() => setMenuSelection(null)} />
+        </ListContainer>
+      )}
+    </>
   );
 }
 

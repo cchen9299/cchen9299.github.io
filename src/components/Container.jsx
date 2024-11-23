@@ -39,11 +39,11 @@ const Space = styled.div`
 `;
 
 export default function Container() {
-  const { sceneRefs: { containerRef } } = useStore();
+  const { sceneRefs: { containerRef }, isImmersive } = useStore();
   const { floorList } = useElevatorStore(1);
 
   return (
-    <ContainerNode ref={containerRef}>
+    <ContainerNode ref={containerRef} isImmersive={isImmersive}>
       <ForthLayer />
       <ThirdLayer />
       {/* <SecondLayer /> */}
@@ -65,11 +65,11 @@ export default function Container() {
   );
 }
 
-export const ContainerNode = styled.div`
+const ContainerNode = styled.div`
   height: 100vh;
   max-height:200vh;
   perspective: 300px;
-  overflow-y: scroll;
+  overflow-y: ${({ isImmersive }) => (isImmersive ? 'hidden' : 'scroll')};
   overflow-x: hidden;
   scroll-behavior: smooth
 `;
