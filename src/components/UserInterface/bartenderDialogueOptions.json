@@ -17,7 +17,7 @@
                 "id": "1-2",
                 "minConvoLength": 0,
                 "me": "What do you know about me?",
-                "npc": "Well, whatever you wrote in the json object as my responses. Like how you were once an aspiring architect but didn't want to sit in an office so you decided to go work on construction sites.: Then you decided that wasn't paying enough for the level of stress, so you became a mediocre UI designer. And you got bored of that so you went and became a glorified online form maker."
+                "npc": "Well, whatever you wrote in the json object as my responses. Like how you were once an aspiring architect but didn't want to sit in an office so you decided to go work on construction sites. Then you decided that wasn't paying enough for the level of stress, so you became a mediocre UI designer. And you got bored of that so you went and became a glorified online form maker."
             },
             {
                 "level": 2,

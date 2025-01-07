@@ -13,7 +13,6 @@ const InterfaceContainer = styled.div`
     backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: ${({ isImmersive }) => `calc(96vh - (${isImmersive ? CINEMATIC_COVER_HEIGHT : '0px'} * 2) - 30px)`};
 `;
 

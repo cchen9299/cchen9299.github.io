@@ -12,13 +12,8 @@ const Wrapper = styled.div`
     color: rgb(175, 232, 255);
   }
 
-  h2 {
+  h1 {
     color: rgb(175, 232, 255);
-  }
-
-  h5 {
-    color: rgb(175, 232, 255);
-    font-size: 14px;
   }
 `;
 
@@ -28,7 +23,7 @@ const DetailsContainer = styled.div`
     max-height: 50vh;
   }
   height: 25vh;
-  padding: 10px 20px;
+  padding: 0 10px 10px;
   scrollbar-color: rgba(7, 18, 32, 0.7) rgb(32, 117, 214);
   scrollbar-width: thin;
   background-color: rgba(7, 18, 32, 0.7);
@@ -40,8 +35,8 @@ const DetailsContainer = styled.div`
 const DialogueButton = styled.button`
   border: none;
   background-color: transparent;
-  color: rgb(175, 232, 255);
-  padding: 5px 0;
+  color: ${({ shouldBold }) => (shouldBold ? 'cyan' : 'rgb(175, 232, 255)')}!important;
+  padding: 10px 0;
   font-family: 'Space Mono';
   font-size: 14px;
   font-weight: ${({ shouldBold }) => (shouldBold ? 700 : 400)}!important;
@@ -50,7 +45,7 @@ const DialogueButton = styled.button`
     color: rgb(208, 240, 253);
   }
   &:active {
-    color: rgb(175, 232, 255);
+    color: cyan;
   }
 `;
 
@@ -99,20 +94,41 @@ export default function ReceptionInterface() {
 
   return (
     <Wrapper>
-      <h2>Bartender</h2>
-      <h4>About Me</h4>
+      <h1>Bartender</h1>
+      <h3>About Me</h3>
       <DetailsContainer ref={dialogContainer} id="dialogueContainer">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {history.map(({ npc, me }) => {
             const message = npc || me;
             return (
-              <p key={message} style={{ alignSelf: me ? 'flex-end' : 'flex-start', marign: '10px 0' }}>{message}</p>
+              <p
+                key={message}
+                style={{
+                  alignSelf: me ? 'flex-end' : 'flex-start',
+                  marign: '10px 0',
+                  padding: '5px 10px 10px',
+                  maxWidth: '70%',
+                  // ...me
+                  //   ? {
+                  //     backgroundColor: 'rgb(32, 117, 214)', border: '2px solid black',
+                  //   }
+                  //   : {
+                  //     backgroundColor: '', border: '2px solid black',
+                  //   },
+                }}
+              >
+                {message}
+              </p>
             );
           })}
         </div>
       </DetailsContainer>
       <div style={{
-        alignSelf: 'flex-end', display: 'flex', flexDirection: 'column', alignItems: 'flex-end',
+        alignSelf: 'flex-end',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        marginTop: '10px',
       }}
       >
         {options.map(({
