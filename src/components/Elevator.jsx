@@ -155,7 +155,7 @@ export default function Elevator({ level }) {
     setTimeout(() => {
       containerRef.current.scrollTo(0, destinationTop);
       character.setY(getMoveFloorCalc(id));
-    }, 450);
+    }, 300);
   }, [
     character,
     containerRef,

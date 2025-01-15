@@ -53,7 +53,7 @@ const InterfaceContainer = styled.div`
     return direction === 'normal' ? menuOpen(calc) : menuClose(calc);
   }
 };
-    animation-duration: 1000ms;
+    animation-duration: 800ms;
     animation-fill-mode: forwards;
 `;
 
@@ -93,7 +93,7 @@ export default function UserInterface() {
   const onInterfaceSelection = useCallback((id) => {
     setAnimateDirection('normal');
     setInterfaceSelection(id);
-  }, [interfaceSelection]);
+  }, []);
   const [hasPageLoaded, setHasPageLoaded] = useState(false);
 
   const Interface = interfaceMap[interfaceSelection];
@@ -104,8 +104,8 @@ export default function UserInterface() {
         setTimeout(() => {
           setAnimateDirection('normal');
           setInterfaceSelection(null);
-        }, 1050);
-        setTimeout(() => setInterfaceSelection('context'), 1150);
+        }, 800);
+        setTimeout(() => setInterfaceSelection('context'), 820);
       }
       return true;
     });
