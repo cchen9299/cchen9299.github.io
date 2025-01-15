@@ -150,10 +150,12 @@ export default function Elevator({ level }) {
 
   const onMenuSelection = useCallback((id) => {
     const { elevationTop: destinationTop } = getElevationBounds(id);
-    containerRef.current.scrollTo(0, destinationTop);
-    character.setY(getMoveFloorCalc(id));
     setMenuSelection(null);
     setCurrentLevel(id);
+    setTimeout(() => {
+      containerRef.current.scrollTo(0, destinationTop);
+      character.setY(getMoveFloorCalc(id));
+    }, 450);
   }, [
     character,
     containerRef,

@@ -39,7 +39,7 @@ export default function RoofInterface() {
         </p>
 
         <p>
-          {`I have also added a "scenamatic" mode that also hijacks the scroll bar. You can turn 
+          {`Additionally, I have added a "scenamatic" mode that hijacks the scroll bar. You can turn 
           it off in the Settings.`}
         </p>
 

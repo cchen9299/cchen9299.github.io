@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Highlight } from '../../common/styledComponents';
+// import { Highlight } from '../../common/styledComponents';
 
 const LeftTop = styled.div`
     width: 135px;
@@ -91,7 +91,7 @@ export default function Couch() {
       </LeftTop>
       <LeftBottom />
       <Glow />
-      <Highlight height="85px" width="350px" bottom="-10px" left="-10px" />
+      {/* <Highlight height="85px" width="350px" bottom="-10px" left="-10px" /> */}
     </Wrapper>
   );
 }

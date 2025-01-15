@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import useStore from '../../Store';
 import RoofInterface from './RoofInterface';
@@ -21,7 +21,13 @@ const contextMap = {
 
 export default function Context() {
   const { currentLevel } = useStore();
-  const Content = contextMap[currentLevel];
+  const ref = useRef(contextMap[currentLevel]);
+  const { current: Content } = ref;
+
+  useEffect(() => {
+    setTimeout(() => { ref.current = contextMap[currentLevel]; }, 1150);
+  }, [currentLevel]);
+
   return (
     <Wrapper>
       <Content />
