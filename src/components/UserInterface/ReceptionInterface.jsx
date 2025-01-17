@@ -95,7 +95,7 @@ export default function ReceptionInterface() {
   return (
     <Wrapper>
       <h1>Bartender</h1>
-      <h3>About Me</h3>
+      <h3>(well, pretend there is a bartender in front of the bar for now)</h3>
       <DetailsContainer ref={dialogContainer} id="dialogueContainer">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {history.map(({ npc, me }) => {
