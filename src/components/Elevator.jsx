@@ -1,8 +1,8 @@
 import React, {
   useCallback, useEffect, useRef, useState,
 } from 'react';
-import styled from 'styled-components';
-import { number } from 'prop-types';
+import styled, { keyframes } from 'styled-components';
+import { bool, func, number } from 'prop-types';
 import { ParallaxLayer } from './Background/styledComponents';
 import useStore, { useElevatorStore } from '../Store';
 import { getElevationBounds } from '../hooks/utils';
@@ -89,7 +89,95 @@ const ListContainer = styled.div`
   border: 2px solid rgb(32, 117, 214);
 `;
 
-export default function Elevator({ level }) {
+const menuOpen = () => keyframes`
+  0% {
+      width: 0%;
+      opacity: 0;
+  }
+  10% {
+      width: 2px;
+      opacity: 0.75;
+  }
+  100% {
+      width: 105px;
+      opacity: 0.75;
+  }
+`;
+
+const menuClose = () => keyframes`
+  0% {
+      width: 105px;
+      opacity: 0.75;
+  }
+  90% {
+      width: 0%;
+      opacity: 1;
+  }
+  100% {
+      width: 0%;
+      opacity: 0;
+  }
+`;
+
+const Light = styled.div`
+  z-index: 10;
+  height: 180px;
+  background-color: #fff2c4;
+  box-shadow:
+      0 0 20px 5px #f9ce30,
+      0 0 20px 5px #e0e0e0;
+
+  animation-name: ${({ isDoorOpened }) => (isDoorOpened ? menuOpen() : menuClose())};
+  animation-duration: 600ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  mix-blend-mode: screen;
+  position: absolute;
+`;
+
+const ElevatorInsideContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  width: 110px;
+
+  animation-name: ${({ isDoorOpened }) => (isDoorOpened ? menuOpen() : menuClose())};
+  animation-duration: 600ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  mix-blend-mode: screen;
+  position: absolute;
+`;
+
+const ElevatorInsideShade = styled.div`
+  height: 180px;
+  width: 70px;
+  background-color: #101D43;
+  position: absolute;
+  right: 20px;
+  z-index: 2;
+  opacity: ${({ isDoorOpened }) => (isDoorOpened ? 0.2 : 0)};
+  transition: opacity 0;
+  transition-delay: 400ms;
+`;
+const ElevatorInsideTop = styled.div`
+  width: 100%;
+  height: 110px;
+  background-color: #465A93;
+`;
+const ElevatorInsideBottom = styled.div`
+  width: 100%;
+  height: 68px;
+  border-top: 2px solid #212940;
+  background-color: #2B275D;
+`;
+
+export default function Elevator({
+  level,
+  isDoorOpened,
+  setIsDoorOpened,
+}) {
   const ref = useRef();
   const {
     interactableRefs: { character },
@@ -152,15 +240,20 @@ export default function Elevator({ level }) {
     const { elevationTop: destinationTop } = getElevationBounds(id);
     setMenuSelection(null);
     setCurrentLevel(id);
+    setIsDoorOpened(false);
     setTimeout(() => {
       containerRef.current.scrollTo(0, destinationTop);
       character.setY(getMoveFloorCalc(id));
     }, 300);
+    setTimeout(() => {
+      setIsDoorOpened(true);
+    }, 800);
   }, [
     character,
     containerRef,
     setMenuSelection,
     setCurrentLevel,
+    setIsDoorOpened,
   ]);
 
   useEffect(() => {
@@ -178,10 +271,20 @@ export default function Elevator({ level }) {
 
   return (
     <>
-      <ElevatorNode ref={ref} isTopLevel={level === 0} onClick={onElevatorClick}>
+      <ElevatorNode
+        ref={ref}
+        isTopLevel={level === 0}
+        onClick={onElevatorClick}
+      >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {/* <Highlight height="205px" width="140px" bottom="-10px" left="5px" /> */}
           <DoorLeft style={{ marginRight: 2 }} />
+          <ElevatorInsideShade isDoorOpened={isDoorOpened} />
+          <ElevatorInsideContainer isDoorOpened={isDoorOpened}>
+            <ElevatorInsideTop />
+            <ElevatorInsideBottom />
+          </ElevatorInsideContainer>
+          <Light isDoorOpened={isDoorOpened} />
           <DoorRight />
         </div>
         <ElevatorText>Elevator</ElevatorText>
@@ -212,4 +315,6 @@ export default function Elevator({ level }) {
 
 Elevator.propTypes = {
   level: number.isRequired,
+  isDoorOpened: bool.isRequired,
+  setIsDoorOpened: func.isRequired,
 };

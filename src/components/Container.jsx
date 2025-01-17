@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Character from './Character';
 import useStore, { useElevatorStore } from '../Store';
@@ -41,6 +41,7 @@ const Space = styled.div`
 export default function Container() {
   const { sceneRefs: { containerRef }, isImmersive } = useStore();
   const { floorList } = useElevatorStore(1);
+  const [isDoorOpened, setIsDoorOpened] = useState(true);
 
   return (
     <ContainerNode ref={containerRef} isImmersive={isImmersive}>
@@ -54,7 +55,11 @@ export default function Container() {
           <div style={{ flexGrow: 1 }}>
             <Space>
               <FloorContent level={levelFromRoof} />
-              <Elevator level={levelFromRoof} />
+              <Elevator
+                level={levelFromRoof}
+                isDoorOpened={isDoorOpened}
+                setIsDoorOpened={setIsDoorOpened}
+              />
             </Space>
           </div>
           {levelFromRoof !== 0 && <Ceiling lastLevels={levelFromRoof > 2} />}
