@@ -19,7 +19,7 @@ const Top = styled.div`
 const Bottom = styled.div`
     height: 50%;
     position: relative;
-    z-index: 10000;
+    z-index: 10;
     display: flex;
     align-items: flex-end;
 `;

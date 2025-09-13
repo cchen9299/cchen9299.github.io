@@ -1,0 +1,59 @@
+[
+    {
+        "level": 1,
+        "id": "1",
+        "me": "Remind me why I built you? And this world?",
+        "npc": "You mentioned something about parallax scrolls, something about video games and something about needing to scratch an itch.",
+        "subOptions": [
+            {
+                "level": 2,
+                "id": "1-1",
+                "minConvoLength": 0,
+                "me": "Any suggesstions on what to do after this?",
+                "npc": "Probably something that's actually useful. Like making me NOT just a script but an actual AI? You do have a long todo list in the basement."
+            },
+            {
+                "level": 2,
+                "id": "1-2",
+                "minConvoLength": 0,
+                "me": "What do you know about me?",
+                "npc": "Well, whatever you wrote in the json object as my responses. Like how you were once an aspiring architect but didn't want to sit in an office so you decided to go work on construction sites. Then you decided that wasn't paying enough for the level of stress, so you became a mediocre UI designer. And you got bored of that so you went and became a glorified online form maker."
+            },
+            {
+                "level": 2,
+                "id": "1-3",
+                "minConvoLength": 0,
+                "navigation": "Back"
+            }
+        ],
+        "minConvoLength": 0
+    },
+    {
+        "level": 1,
+        "id": "2",
+        "me": "Do you know where my resume is?",
+        "npc": "You know, you built me to narrate a bartender, not a personal assistant. But I guess I do have a copy of your resume here.",
+        "minConvoLength": 0
+    },
+    {
+        "level": 1,
+        "id": "3",
+        "me": "This is basically me having a monologue... Do I always talk to myself?",
+        "npc": "Depends on how much you've had. You did have a full on conversation with Alexa that one time.",
+        "subOptions": [
+            {
+                "level": 2,
+                "id": "3-1",
+                "minConvoLength": 6,
+                "me": "What did I say...?",
+                "npc": "I remember as much as you do. Which is not much."
+            },
+            {
+                "level": 2,
+                "id": "1-3",
+                "navigation": "Back"
+            }
+        ],
+        "minConvoLength": 6
+    }
+]

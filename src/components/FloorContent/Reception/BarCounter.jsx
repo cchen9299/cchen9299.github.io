@@ -37,7 +37,7 @@ const Glow = styled.div`
 
 const WaterfallEnd = styled.div`
     background-color: #191446;
-    height: 90px;
+    height: 80px;
     width: 40px;
     border-top: 10px solid #465A93;
     border-right: 10px solid #465A93;

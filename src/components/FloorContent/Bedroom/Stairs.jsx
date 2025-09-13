@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 
 const getTreadMap = (treadCount) => {
   const treadMap = [];
-  for (let i = 0; i <= treadCount; i += 1) {
+  for (let i = 1; i <= treadCount; i += 1) {
     treadMap.push(<Tread count={i} key={`tread-number-${i}`} />);
   }
   return treadMap;

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { ParallaxLayer } from '../styledComponents';
+import { ParallaxLayer } from './Background/styledComponents';
 import { useCharacterActions } from '../hooks';
 
 const CharacterNode = styled(ParallaxLayer)`
@@ -9,6 +9,7 @@ const CharacterNode = styled(ParallaxLayer)`
   background-color: black;
   position: absolute;
   z-index: 100000;
+  opacity: 0;
 
   left: ${({ x }) => x}vw;
   top: ${({ y }) => `calc(${y})`};

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TowerNode } from '../../styledComponents';
+import { TowerNode } from '../Background/styledComponents';
 import Lights from './Lights';
 
 const Tower = ({ children, short, ...rest }) => (

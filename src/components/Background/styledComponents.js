@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useFloorRandom } from './hooks';
+import { useFloorRandom } from '../../hooks';
 
 export const ParallaxLayer = styled.div`
   display: flex;

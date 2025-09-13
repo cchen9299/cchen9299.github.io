@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Character from './Character';
 import useStore, { useElevatorStore } from '../Store';
 import Elevator from './Elevator';
-import ForthLayer from './ForthLayer';
-import ThirdLayer from './ThirdLayer';
+import ForthLayer from './Background/ForthLayer';
+import ThirdLayer from './Background/ThirdLayer';
 import { CINEMATIC_COVER_HEIGHT, FLOOR_HEIGHT } from '../hooks/constants';
 import FloorContent from './FloorContent';
 
@@ -36,15 +36,15 @@ const Space = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  z-index: -1;
 `;
 
 export default function Container() {
-  const { sceneRefs: { containerRef } } = useStore();
+  const { sceneRefs: { containerRef }, isImmersive } = useStore();
   const { floorList } = useElevatorStore(1);
+  const [isDoorOpened, setIsDoorOpened] = useState(true);
 
   return (
-    <ContainerNode ref={containerRef}>
+    <ContainerNode ref={containerRef} isImmersive={isImmersive}>
       <ForthLayer />
       <ThirdLayer />
       {/* <SecondLayer /> */}
@@ -55,7 +55,11 @@ export default function Container() {
           <div style={{ flexGrow: 1 }}>
             <Space>
               <FloorContent level={levelFromRoof} />
-              <Elevator level={levelFromRoof} />
+              <Elevator
+                level={levelFromRoof}
+                isDoorOpened={isDoorOpened}
+                setIsDoorOpened={setIsDoorOpened}
+              />
             </Space>
           </div>
           {levelFromRoof !== 0 && <Ceiling lastLevels={levelFromRoof > 2} />}
@@ -66,11 +70,12 @@ export default function Container() {
   );
 }
 
-export const ContainerNode = styled.div`
+const ContainerNode = styled.div`
   height: 100vh;
   max-height:200vh;
   perspective: 300px;
-  overflow-y: scroll;
+  overflow-y: ${({ isImmersive }) => (isImmersive ? 'hidden' : 'scroll')};
   overflow-x: hidden;
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(7, 18, 32, 0.7) rgb(13, 30, 48);
 `;

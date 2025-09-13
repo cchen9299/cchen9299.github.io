@@ -20,12 +20,18 @@ export function Store({ children }) {
     {}
   );
   const [interactingRef, setInteractingRef] = useState(null);
+  const [currentLevel, setCurrentLevel] = useState(0);
+  const [isImmersive, setIsImmersive] = useState(true);
 
   const initialState = useMemo(() => ({
     interactableRefs,
     dispatchInteractableRefs,
     interactingRef,
     setInteractingRef,
+    currentLevel,
+    setCurrentLevel,
+    isImmersive,
+    setIsImmersive,
 
     sceneRefs: {
       containerRef,
@@ -41,17 +47,13 @@ export function Store({ children }) {
     dispatchInteractableRefs,
     interactingRef,
     containerRef,
+    currentLevel,
+    setCurrentLevel,
+    isImmersive,
+    setIsImmersive,
   ]);
 
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [menuSelection, setMenuSelection] = useState(null);
-
   const initialElevatorState = useMemo(() => ({
-    showTooltip,
-    setShowTooltip,
-    menuSelection,
-    setMenuSelection,
-
     floorList: [
       {
         levelFromRoof: 0,
@@ -63,37 +65,29 @@ export function Store({ children }) {
       {
         levelFromRoof: 1,
         floor: 3,
-        title: 'About Me',
-        subtitle: 'Bedroom',
+        title: 'Experience',
+        subtitle: 'Apartment',
         refKey: 'bedroomElevatorRef',
       },
       {
         levelFromRoof: 2,
         floor: 2,
-        title: 'Experience',
-        subtitle: 'Office',
-        refKey: 'officeElevatorRef',
+        title: 'About Me',
+        subtitle: 'Lounge',
+        refKey: 'groundElevatorRef',
       },
       {
         levelFromRoof: 3,
         floor: 1,
-        title: 'Some Other Stuff',
-        subtitle: 'Ground',
-        refKey: 'groundElevatorRef',
+        title: 'Backlog',
+        subtitle: 'Basement',
+        refKey: 'basementElevatorRef',
       },
     ],
-
-  }), [
-    showTooltip,
-    setShowTooltip,
-    menuSelection,
-    setMenuSelection,
-  ]);
+  }), []);
 
   return (
-    <StoreContext.Provider
-      value={initialState}
-    >
+    <StoreContext.Provider value={initialState}>
       <ElevatorContext.Provider value={initialElevatorState}>
         {children}
       </ElevatorContext.Provider>

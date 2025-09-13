@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ParallaxLayer } from '../../styledComponents';
+import { ParallaxLayer } from '../styledComponents';
 import TowerGroup from './TowerGroup';
 
 export const FarBox = styled.div`
