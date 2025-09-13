@@ -33,6 +33,7 @@
         "id": "2",
         "me": "Do you know where my resume is?",
         "npc": "You know, you built me to narrate a bartender, not a personal assistant. But I guess I do have a copy of your resume here.",
+        "richText": "resume here.",
         "minConvoLength": 0
     },
     {

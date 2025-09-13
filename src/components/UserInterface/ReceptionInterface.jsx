@@ -73,7 +73,7 @@ export default function ReceptionInterface() {
   const previousOptions = useRef(options);
 
   const onOptionClick = ({
-    me, npc, navigation, subOptions,
+    me, npc, navigation, subOptions, richText
   }) => {
     if (navigation) {
       setOptions(previousOptions.current);
@@ -85,7 +85,7 @@ export default function ReceptionInterface() {
       dialogContainer.current.scrollTo({ top: 9999, behavior: 'smooth' });
     }, 10);
     setTimeout(() => {
-      setHistory((c) => [...c, { npc }]);
+      setHistory((c) => [...c, { npc, richText }]);
     }, 500);
     setTimeout(() => {
       dialogContainer.current.scrollTo({ top: 9999, behavior: 'smooth' });
@@ -98,11 +98,12 @@ export default function ReceptionInterface() {
       <h3>(well, pretend there is a bartender in front of the bar for now)</h3>
       <DetailsContainer ref={dialogContainer} id="dialogueContainer">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {history.map(({ npc, me }) => {
+          {history.map(({ npc, me, richText }) => {
             const message = npc || me;
+            const formattedMessage = richText ? message.replace(richText, '') : message;
             return (
               <p
-                key={message}
+                key={formattedMessage}
                 style={{
                   alignSelf: me ? 'flex-end' : 'flex-start',
                   marign: '10px 0',
@@ -117,7 +118,7 @@ export default function ReceptionInterface() {
                   //   },
                 }}
               >
-                {message}
+                {formattedMessage} {richText && <a href="" style={{color:'yellow'}}>{richText}</a>}
               </p>
             );
           })}
@@ -132,7 +133,7 @@ export default function ReceptionInterface() {
       }}
       >
         {options.map(({
-          id, me, npc, subOptions, minConvoLength, navigation,
+          id, me, npc, subOptions, minConvoLength, navigation, richText
         }, i) => {
           if (dialogueHistory.length >= minConvoLength) {
             return (
@@ -142,7 +143,7 @@ export default function ReceptionInterface() {
                 style={{ fontWeight: 'bold' }}
                 shouldBold={!history.some(({ me: historyMe }) => historyMe === me)}
                 onClick={() => onOptionClick({
-                  me, npc, subOptions, navigation,
+                  me, npc, subOptions, navigation, richText
                 })}
               >
                 {i + 1}. {me || navigation}

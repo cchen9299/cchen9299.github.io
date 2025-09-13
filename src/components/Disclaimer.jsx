@@ -38,18 +38,16 @@ const Disclaimer = ({setShowDisclaimer}) => {
         <p>{`For those of you visiting this site, chances are you’re here through the portfolio link I included with my resume.`}</p>
         <br/>
         <p>
-          {`While this is my latest portfolio, it’s not a fully realized site. Since 2024, I’ve treated it as an experimental project with a heavy emphasis on CSS 
-          (and it's not even responsive at all...).
+          {`While this is my latest portfolio, it’s not a fully realized site. Since 2024, I’ve treated it as an experimental project with a heavy emphasis on CSS.
           I intentionally built it with older stacks (Gatsby and Styled Components with just Github Pages) because I hadn’t previously had the chance to use them in a complete project. 
           Most of my professional work has involved either proprietary frameworks or newer stacks like Next.js.`}
         </p>
           <br/>
         <p>
-          {`With the rapid rise of GenAI tools and the pace at which they’re reshaping frontend development, 
-          I’ve had to deprioritize this project in order to focus on more relevant, market-aligned technologies. 
-          So, while I’ve poured many hours into this portfolio as I hand designed and coded every single visual elements on the page and am very proud of the outcome,
-          (yes, designs done in Figma, and every element on the page is styled by CSS by hand, no AI tools were used for the design or code here),
-          please keep in mind that it’s not a comprehensive reflection of my skills and experience. If you’d like to see more complete and up-to-date examples of my work, feel free to reach out. 
+          {`I’ve poured many hours into this portfolio and am very proud of the outcome; hand designed and coded every single visual elements on the page.
+          (yes, designs done in Figma, and every element on the page is styled by CSS by hand, no AI tools were used for the design or code here). 
+          However with the rapid rise of GenAI tools and the pace at which they’re reshaping frontend development, I’ve had to deprioritize this project in order to focus on more relevant, market-aligned technologies. 
+          So please keep in mind that it’s not a comprehensive reflection of my skills and experience. If you’d like to see more complete and up-to-date examples of my work, feel free to reach out. 
           Much of it is private to my family business or my current employer, but I’d be happy to share what I can.`}
         </p>
           <br/>
