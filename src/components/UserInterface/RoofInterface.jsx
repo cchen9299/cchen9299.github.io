@@ -31,6 +31,7 @@ export default function RoofInterface() {
       <h1>{'Hi, I\'m Hank.'}</h1>
       <h3>{'I\'m a Software Engineer. Mostly.'}</h3>
       <DetailsContainer>
+        <p>More words...</p>
         <p>
           {`This portfolio is the manifestation of an idea focusing around the CSS parallax
         scroll I've had since my designer days. Now a software engineer, I've tossed in
@@ -43,10 +44,9 @@ export default function RoofInterface() {
           it off in the Settings.`}
         </p>
 
-        <p style={{ mixBlendMode: 'color-dodge' }}>Disclaimers:</p>
-        <p>- This site has not been optimized for non-chromium browsers</p>
-        <p>- Mobile responsive is none existence</p>
-        <p>{'- There is a lot that\'s still a work in progress. Full list in the Basement'}</p>
+        <p>
+          {`Hover over the elevator on the left to see the floor options. Click on a floor to go there.`}
+        </p>
       </DetailsContainer>
     </Wrapper>
   );
