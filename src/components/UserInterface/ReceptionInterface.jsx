@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import dialogueList from './bartenderDialogueOptions.json';
+import pdf from '../../images/Hank_Chen.pdf';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -118,7 +119,7 @@ export default function ReceptionInterface() {
                   //   },
                 }}
               >
-                {formattedMessage} {richText && <a href="" style={{color:'yellow'}}>{richText}</a>}
+                {formattedMessage} {richText && <a target='_blank' href={pdf} download={"Hank_Chen.pdf"} style={{color:'yellow'}}>{richText}</a>}
               </p>
             );
           })}
