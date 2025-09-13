@@ -4,6 +4,7 @@ import { StyleSheetManager } from 'styled-components';
 import '../styles.css';
 import { Store } from '../Store';
 import Main from '../components/Main';
+import Disclaimer from '../components/Disclaimer';
 
 function shouldForwardProp(propName, target) {
   if (typeof target === 'string') {
@@ -12,12 +13,16 @@ function shouldForwardProp(propName, target) {
   return true;
 }
 
-const IndexPage = () => (
-  <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-    <Store>
-      <Main />
-    </Store>
-  </StyleSheetManager>
-);
+const IndexPage = () => {
+  const [showDisclaimer, setShowDisclaimer] = React.useState(true);
+  return (
+    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+      <Store>
+        {showDisclaimer && <Disclaimer setShowDisclaimer={setShowDisclaimer} />}
+        <Main />
+      </Store>
+    </StyleSheetManager>
+  )
+};
 
 export default IndexPage;
